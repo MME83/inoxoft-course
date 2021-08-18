@@ -58,7 +58,7 @@ fs.readdir(girlsPath, (err, files) => {
         return;
     } 
 
-    console.log("List of all files in folder boys: \n", files, "\n");
+    console.log("List of all files in folder girls: \n", files, "\n");
 
     files.forEach(file => {
         const currentFilePath = path.join(girlsPath, file);
