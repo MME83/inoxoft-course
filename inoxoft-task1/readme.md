@@ -7,6 +7,10 @@ Upload or create some files *.txt/*.json in folder: `upload` with random data in
 moving files by gender to custom folder "../file-bd/girls/" or "../file-bd/boys/"
 ```
 
+
+##Download folder inoxoft-task1 from PR to your PC!!!
+```
+
 ###Run app/program manual -> (download folder `inoxoft-task1` to your PC), create in your main root folders: `file-db/boys` and  `file-db/girls`
 ```
 node app.js
