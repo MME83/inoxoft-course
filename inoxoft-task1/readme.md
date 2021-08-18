@@ -4,10 +4,14 @@ Upload or create some files *.txt/*.json in folder: `upload` with random data in
 
 ##Resut
 ``` 
-sorting all files with gender and moving them to right folder "../file-bd/girls/" or "../file-bd/boys/"
+moving files by gender to custom folder "../file-bd/girls/" or "../file-bd/boys/"
 ```
 
-###Run app/program (download folder `inoxoft-task1` to your PC)
+###Run app/program manual -> (download folder `inoxoft-task1` to your PC), create in your main root folders: `file-db/boys` and  `file-db/girls`
 ```
 node app.js
 ```
+
+###Run app/program auto -> (download folder `inoxoft-task1` to your PC)
+```
+npm start

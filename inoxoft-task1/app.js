@@ -1,9 +1,11 @@
+const createFolders = require('./createfolders');
+
 const fs = require('fs');
 const path = require('path');
 
 const uploadPath = path.join(__dirname, 'upload');
-const girlsPath = path.join(__dirname, 'file-db', 'girls');
-const boysPath = path.join(__dirname, 'file-db', 'boys');
+
+createFolders.createFolders();
 
 fs.readdir(uploadPath, (err, files) => {
     if (err) {
@@ -29,7 +31,7 @@ fs.readdir(uploadPath, (err, files) => {
 
             if (JSON.parse(data).gender === 'female') {
             
-                fs.rename(currentFilePath, girlsPath + '/' + file, (err) => {
+                fs.rename(currentFilePath, createFolders.girlsPath + '/' + file, (err) => {
                     if (err) {
                         console.log(err);
                         return;
@@ -39,7 +41,7 @@ fs.readdir(uploadPath, (err, files) => {
                 });
             } else if (JSON.parse(data).gender === 'male') {
                 
-                fs.rename(currentFilePath, boysPath + '/' + file, (err) => {
+                fs.rename(currentFilePath, createFolders.boysPath + '/' + file, (err) => {
                     if (err) {
                         console.log(err);
                         return;

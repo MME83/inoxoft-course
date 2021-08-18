@@ -1,0 +1,13 @@
+{
+  "name": "inoxoft-task1",
+  "version": "1.0.0",
+  "description": "moving files to custom folder by gender",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "mme83",
+  "license": "ISC"
+}
