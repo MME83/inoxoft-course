@@ -17,5 +17,5 @@
 
 ### Run app
 ```
-npm start or node app.js
+npm start or node server.js
 ```
