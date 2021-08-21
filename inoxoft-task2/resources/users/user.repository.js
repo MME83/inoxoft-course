@@ -2,4 +2,10 @@ const users = require('../../db/users');
 
 const getAll = async () => users;
 
-module.exports = { getAll, users };
+const getByLogin = async (login) => users.find((user) => user.login === login);
+
+module.exports = { 
+    getAll, 
+    getByLogin, 
+    users 
+};
