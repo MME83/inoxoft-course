@@ -1,0 +1,80 @@
+[
+    {
+        "name": "Dima",
+        "age": 22,
+        "login": "dima@gmail.com",
+        "pass": "Pa$$w0rd"
+    },
+    {
+        "name": "Vika",
+        "age": 18,
+        "login": "vika@gmail.com",
+        "pass": "Pa$$w0rd"
+    },
+    {
+        "name": "Khrystyna",
+        "age": 16,
+        "login": "khrystyna@gmail.com",
+        "pass": "Pa$$w0rd"
+    },
+    {
+        "name": "Vikto",
+        "age": 25,
+        "login": "victor@gmail.com",
+        "pass": "Pa$$w0rd"
+    },
+    {
+        "name": "Larisa",
+        "age": 25,
+        "login": "larisa@gmail.com",
+        "pass": "pas$$word"
+    },
+    {
+        "name": "Petro",
+        "age": 22,
+        "login": "petro@gmail.com",
+        "pass": "pas$$word"
+    },
+    {
+        "name": "Kubita",
+        "age": 22,
+        "login": "kubitagmail.com",
+        "pass": "pas$$word"
+    },
+    {
+        "name": "Kubita",
+        "age": 22,
+        "login": "kubietagmail.com",
+        "pass": "pas$$word"
+    },
+    {
+        "name": "Kubita",
+        "age": 22,
+        "login": "kudbietagmail.com",
+        "pass": "pas$$word"
+    },
+    {
+        "name": "Kubita",
+        "age": 22,
+        "login": "kudbiseta@gmail.com",
+        "pass": "pas$$word"
+    },
+    {
+        "name": "Kubita",
+        "age": 22,
+        "login": "kudbidseta@gmail.com",
+        "pass": "pas$$word"
+    },
+    {
+        "name": "Kubita",
+        "age": 22,
+        "login": "kuddbidseta@gmail.com",
+        "pass": "pas$$word"
+    },
+    {
+        "name": "Kubita",
+        "age": 22,
+        "login": "kuddbidsdeta@gmail.com",
+        "pass": "pas$$word"
+    }
+]

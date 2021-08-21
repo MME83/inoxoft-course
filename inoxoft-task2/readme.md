@@ -14,6 +14,10 @@
 
 ### Download PR `inoxoft-course` from git to your PC and unzip folder `inoxoft-task2` !!!
 
+### Install app
+```
+npm install
+```
 
 ### Run app
 ```

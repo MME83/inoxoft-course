@@ -5,7 +5,10 @@ const getAll = () => usersRepo.getAll();
 
 const getByLogin = (login) => usersRepo.getByLogin(login);
 
+const addUser = (userData) => usersRepo.addUser(userData);
+
 module.exports = {
     getAll,
     getByLogin,
+    addUser
 };
