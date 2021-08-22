@@ -32,13 +32,15 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 app.get('/signin', (req, res) => {
-    res.render('signin');
+    const { login, name, age } = req.query;
+
+    res.render('signin', { name, login, age });
 });
 app.get('/signup', (req, res) => {
     res.render('signup');
 });
 app.get('/users', (req, res) => {
-    res.render('users', { title: "Users page", users });
+    res.render('users', { title: "List of all users", users });
 });
 
 module.exports = app;

@@ -26,6 +26,7 @@ router.route('/').post(async (req, res) => {
 });
 
 // get the user by id|login='email'
+/*
 router.route('/:userLogin').get(async (req, res) => {
     
     const user = await usersService.getByLogin(req.params.userLogin);
@@ -36,6 +37,6 @@ router.route('/:userLogin').get(async (req, res) => {
     } else {
         res.json(User.toResponse(user));
     }
-});
+});*/
 
 module.exports = router;
