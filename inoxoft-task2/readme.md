@@ -5,7 +5,7 @@
 1. Sign-up page (front-end) - when new user creates email + pass, this data are added to file db (back-end). 
    *if the user(email) exist - receive an error
 2. Sign-in page (front-end) - when user send email + pass, find data in db file and show his info with hello msg + button on page that shows all users from db file.
-   *otherwise show msg with registration/sign-up info
+   *otherwise redirect t0 registration/sign-up page
 3. *Email is unique, without duplication
 
 ``` 
