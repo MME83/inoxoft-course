@@ -4,7 +4,7 @@ const User = require('./user.model');
 const usersService = require('./user.service');
 
 // get all users
-/*router.route('/all').get(async (req, res) => {
+/*router.route('/').get(async (req, res) => {
     const users = await usersService.getAll();
 
     res.json(users.map(User.toResponse));
@@ -17,7 +17,7 @@ router.route('/').post(async (req, res) => {
     const userLogin = await usersService.addUser(req.body);
 
     if (userLogin !== undefined) {
-        res.status(302).json({ message: `user with email: ${req.body.login} exist, please add new user or sign-in` });
+        res.status(302).json({ message: `Server-> user with email: ${req.body.login} exist, please change email or try to sign in` });
         return;
     } else {
        // res.status(201).send(User.toResponse(req.body));
