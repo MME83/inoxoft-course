@@ -10,7 +10,7 @@ router.route('/').post(async (req, res) => {
     const user = await loginService.getUserIfLogin(login, password);
 
     if (!user) {
-        res.status(404).send(`<html><head>//server Response</head><body><h1>You have no account yet, pls SIGN UP</h1><button onclick="window.location.href='/signup/';">Sign UP</button></body></html>`);
+        res.status(404).redirect("/signup");
         return;
     } else {
         res.status(301).redirect(`/signin?login=${user.login}&name=${user.name}&age=${user.age}`);
