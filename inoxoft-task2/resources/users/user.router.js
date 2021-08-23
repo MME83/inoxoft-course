@@ -3,6 +3,8 @@ const User = require('./user.model');
 
 const usersService = require('./user.service');
 
+const emailValid = require('../../util/emailvalidator');
+
 // get all users
 /*router.route('/').get(async (req, res) => {
     const users = await usersService.getAll();
@@ -12,7 +14,17 @@ const usersService = require('./user.service');
 */
 
 // creat new user
-router.route('/').post(async (req, res) => {
+router.route('/').post(async (req, res, next) => {
+
+    if (!req.body.login || !req.body.password) {
+        return res.status(400).send({ message: "Login or password missing." });
+    }
+    
+    const emailIsValid = await emailValid(req.body.login);
+
+    if (!emailIsValid) {
+        return res.status(400).send({ message: "You have entered an invalid email address!" })
+    }
     
     const userLogin = await usersService.addUser(req.body);
 
