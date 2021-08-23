@@ -29,4 +29,5 @@ npm start or node server.js
 1. login page: http://localhost:5000/login
 2. signUp page (create new user): http://localhost:5000/signup
 3. users page (list of all users): http://localhost:5000/users
+4. page with one user: you can see it when you login in or from users page
 ```
