@@ -1,0 +1,6 @@
+[
+    { "name": "Dima", "age": 22, "login": "dima@gmail.com", "password": "Pa$$w0rd" },
+    { "name": "Vika", "age": 18, "login": "vika@gmail.com", "password": "Pa$$w0rd" },
+    { "name": "Khrystyna", "age": 16, "login": "khrystyna@gmail.com", "password": "Pa$$w0rd" },
+    { "name": "Vikto", "age": 25, "login": "victor@gmail.com", "password": "Pa$$w0rd" }
+]
