@@ -40,11 +40,9 @@ module.exports = {
     }),
 
     deleteUser: asyncWrapper(async (req, res) => {
-        const { _id } = req.params;
+        const { user_id } = req.params;
 
-        isValid.IsIdValid(_id);
-
-        await userService.deleteUserById(_id);
+        await userService.deleteUserById(user_id);
 
         return res.status(HttpStatusCode.OK).send({ message: 'User has deleted' });
     }),

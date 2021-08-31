@@ -52,7 +52,7 @@ module.exports = {
     isUserByIdExists: asyncWrapper(async (req, res, next) => {
         const { user_id } = req.params;
 
-        const user = await Users.findOne(user_id);
+        const user = await Users.findById(user_id);
 
         if (!user) throw new CustomError(HttpStatusCode.NOT_FOUND, 'User not found');
 
