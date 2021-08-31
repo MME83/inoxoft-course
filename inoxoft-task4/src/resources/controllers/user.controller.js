@@ -5,7 +5,6 @@ const HttpStatusCode = require('../../common/statusCodes');
 const userService = require('../services/user.services');
 
 const asyncWrapper = require('../../middleware/asyncWrapper');
-const isValid = require('../../util');
 
 module.exports = {
 
@@ -30,11 +29,9 @@ module.exports = {
     }),
 
     updateUser: asyncWrapper(async (req, res) => {
-        const { _id } = req.params;
+        const { user_id } = req.params;
 
-        isValid.IsIdValid(_id);
-
-        const user = await userService.updateUserById(_id, req.body);
+        const user = await userService.updateUserById(user_id, req.body);
 
         return res.status(HttpStatusCode.OK).json(User.toResponse(user));
     }),

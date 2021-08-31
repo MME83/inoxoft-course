@@ -70,4 +70,12 @@ module.exports = {
 
         next();
     }),
+
+    isReqBodyUpdateValid: asyncWrapper(async (req, res, next) => {
+        const value = await uservalidator.updateUserValidator.validateAsync(req.body);
+
+        if (!value) throw new CustomError(HttpStatusCode.BAD_REQUEST, `${value}`);
+
+        next();
+    }),
 };
