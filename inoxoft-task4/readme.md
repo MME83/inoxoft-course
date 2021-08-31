@@ -1,13 +1,14 @@
-# InoXoft Task-4
+# InoXoft Task-4/5
 
-### Create CRUD methods with 2 entities (users & cars) using mongoDB + middlewares, checking requests, using constants
+### Create CRUD methods with entities (users & flats) using mongoDB + middlewares, checking requests, using constants and JOI validation
 
 1. Methods: 
-- create user|car;
-- get all users|cars;
-- get user|car by id;
-- delete current user|car;
-- update user|car;
+- create, get all, get one by id, delete, update;
+2. Models/schema:
+- users (admin & user role)
+- buildings (includs [flats_id's])
+- flats (includs [users_id's], [building_id])
+- user-model for response without pass
 
 ``` 
 
