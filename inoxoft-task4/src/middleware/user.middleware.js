@@ -10,19 +10,21 @@ const { uservalidator } = require('../util');
 module.exports = {
 
     isReqBodyInSignupValid: asyncWrapper(async (req, res, next) => {
-        const value = await uservalidator.createUserValidator.validateAsync(req.body);
+        try {
+            const value = await uservalidator.createUserValidator.validateAsync(req.body);
 
-        if (!value) throw new CustomError(HttpStatusCode.BAD_REQUEST, `${value}`);
+            req.body = value;
 
-        req.body = value;
-
-        next();
+            next();
+        } catch (error) {
+            throw new CustomError(HttpStatusCode.BAD_REQUEST, `${error.details[0].message}`);
+        }
     }),
 
     isEmailExists: asyncWrapper(async (req, res, next) => {
         const { email } = req.body;
 
-        const user = await Users.findOne({ email });
+        const user = await Users.findOne({ email }).exec();
 
         if (user) throw new CustomError(HttpStatusCode.CONFLICT, `The email: ${email} is already exists`);
 
@@ -42,11 +44,13 @@ module.exports = {
     }),
 
     isUserIdValid: asyncWrapper(async (req, res, next) => {
-        const value = await uservalidator.getUserByIdValidator.validateAsync(req.params);
+        try {
+            await uservalidator.getUserByIdValidator.validateAsync(req.params);
 
-        if (!value) throw new CustomError(HttpStatusCode.BAD_REQUEST, `${value}`);
-
-        next();
+            next();
+        } catch (error) {
+            throw new CustomError(HttpStatusCode.BAD_REQUEST, `${error.details[0].message}`);
+        }
     }),
 
     isUserByIdExists: asyncWrapper(async (req, res, next) => {
@@ -62,13 +66,15 @@ module.exports = {
     }),
 
     isReqBodyInLoginValid: asyncWrapper(async (req, res, next) => {
-        const value = await uservalidator.loginUserValidator.validateAsync(req.body);
+        try {
+            const value = await uservalidator.loginUserValidator.validateAsync(req.body);
 
-        if (!value) throw new CustomError(HttpStatusCode.BAD_REQUEST, `${value}`);
+            req.body = value;
 
-        req.body = value;
-
-        next();
+            next();
+        } catch (error) {
+            throw new CustomError(HttpStatusCode.BAD_REQUEST, `${error.details[0].message}`);
+        }
     }),
 
     isReqBodyUpdateValid: asyncWrapper(async (req, res, next) => {
