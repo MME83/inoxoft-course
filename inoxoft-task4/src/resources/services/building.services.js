@@ -14,8 +14,6 @@ const getAll = async () => {
 const getBuildingById = async (id) => {
     const building = await Buildings.findById(id);
 
-    if (!building) throw new CustomError(HttpStatusCode.NOT_FOUND, 'Building not found');
-
     return building;
 };
 
@@ -30,7 +28,7 @@ const createBuilding = async (buildingData) => {
 
     if (!building) throw new CustomError(HttpStatusCode.CONFLICT, 'Can\'t create new building, try again');
 
-    process.stdout.write('\n ...a new building has created \n\n');
+    process.stdout.write('\n ...new building created \n\n');
     return building;
 };
 
@@ -50,7 +48,7 @@ const deleteBuilding = async (id) => {
 
     if (!deletedBuilding) throw new CustomError(HttpStatusCode.NOT_FOUND, 'Building not found');
 
-    process.stdout.write('\n ...building has deleted\n\n');
+    process.stdout.write('\n ...building was deleted\n\n');
     return true;
 };
 

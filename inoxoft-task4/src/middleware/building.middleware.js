@@ -6,7 +6,7 @@ const HttpStatusCode = require('../common/statusCodes');
 const asyncWrapper = require('./asyncWrapper');
 
 const { buildingvalidator } = require('../util');
-const { getBuildingByEmail } = require('../resources/services/building.services');
+const { getBuildingByEmail, getBuildingById } = require('../resources/services/building.services');
 
 module.exports = {
 
@@ -41,38 +41,23 @@ module.exports = {
             throw new CustomError(HttpStatusCode.BAD_REQUEST, `${error.details[0].message}`);
         }
     }),
-/*
-    isUserByIdExists: asyncWrapper(async (req, res, next) => {
-        const { user_id } = req.params;
 
-        const user = await Users.findById(user_id);
+    isBuildingByIdExists: asyncWrapper(async (req, res, next) => {
+        const { building_id } = req.params;
 
-        if (!user) throw new CustomError(HttpStatusCode.NOT_FOUND, 'User not found');
+        const building = await getBuildingById(building_id);
 
-        req.user = user;
+        if (!building) throw new CustomError(HttpStatusCode.NOT_FOUND, 'Building not found');
 
         next();
     }),
 
-    isReqBodyInLoginValid: asyncWrapper(async (req, res, next) => {
+    isBuildingUpdReqBodyValid: asyncWrapper(async (req, res, next) => {
         try {
-            const value = await uservalidator.loginUserValidator.validateAsync(req.body);
-
-            req.body = value;
-
+            await buildingvalidator.buildingUpdBodyJV.validateAsync(req.body);
             next();
         } catch (error) {
             throw new CustomError(HttpStatusCode.BAD_REQUEST, `${error.details[0].message}`);
         }
     }),
-
-    isReqBodyUpdateValid: asyncWrapper(async (req, res, next) => {
-        try {
-            await uservalidator.updateUserValidator.validateAsync(req.body);
-            next();
-        } catch (error) {
-            throw new CustomError(HttpStatusCode.BAD_REQUEST, `${error.details[0].message}`);
-        }
-    }),
-*/
 };
