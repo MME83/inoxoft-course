@@ -44,8 +44,6 @@ const updateBuilding = async (id, data) => {
 const deleteBuilding = async (id) => {
     const deletedBuilding = await Buildings.findByIdAndDelete(id);
 
-    // console.log(deletedBuilding);
-
     if (deletedBuilding) {
         process.stdout.write('\n ...building was deleted\n\n');
     }
