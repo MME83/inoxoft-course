@@ -26,6 +26,11 @@ router.patch(
     buildingController.updateBuilding
 );
 
-// router.delete('/:user_id', userMiddleware.isUserIdValid, userMiddleware.isUserByIdExists, userController.deleteUser);
+router.delete(
+    '/:building_id',
+    buildingMiddleware.isBuildingIdValid,
+    buildingMiddleware.isBuildingByIdExists,
+    buildingController.deleteBuilding
+);
 
 module.exports = router;

@@ -3,14 +3,15 @@
 ### Create CRUD methods with entities (users & flats) using mongoDB + middlewares, checking requests, using constants and JOI validation
 
 1. Methods: 
-- create, get all, get one by id, delete, update;
+- create, get all, get one by id/login/email, delete, update;
 2. Models/schema:
 - users (admin & user role)
 - buildings (includs [flats_id's])
 - flats (includs [users_id's], [building_id])
-- user-model for response without pass
+- user-model response to user without pass (used custom class Users)
+- auth (login and signUP/register)
 
-``` 
+```
 
 ```
 

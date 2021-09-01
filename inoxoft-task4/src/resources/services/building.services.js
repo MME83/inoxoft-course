@@ -1,12 +1,7 @@
 const { Buildings } = require('../models');
 
-const CustomError = require('../../errors/errorHandler');
-const HttpStatusCode = require('../../common/statusCodes');
-
 const getAll = async () => {
     const buildings = await Buildings.find();
-
-    if (!buildings || buildings.length < 1) throw new CustomError(HttpStatusCode.NOT_FOUND, 'No buildings found');
 
     return buildings;
 };
@@ -26,9 +21,10 @@ const getBuildingByEmail = async (email) => {
 const createBuilding = async (buildingData) => {
     const building = await Buildings.create(buildingData);
 
-    if (!building) throw new CustomError(HttpStatusCode.CONFLICT, 'Can\'t create new building, try again');
+    if (building) {
+        process.stdout.write('\n ...new building created \n\n');
+    }
 
-    process.stdout.write('\n ...new building created \n\n');
     return building;
 };
 
@@ -38,7 +34,9 @@ const updateBuilding = async (id, data) => {
         runValidators: true,
     });
 
-    if (!updatedBuilding) throw new CustomError(HttpStatusCode.NOT_FOUND, 'Building not found');
+    if (updatedBuilding) {
+        process.stdout.write('\n ...building updated \n\n');
+    }
 
     return updatedBuilding;
 };
@@ -46,9 +44,12 @@ const updateBuilding = async (id, data) => {
 const deleteBuilding = async (id) => {
     const deletedBuilding = await Buildings.findByIdAndDelete(id);
 
-    if (!deletedBuilding) throw new CustomError(HttpStatusCode.NOT_FOUND, 'Building not found');
+    // console.log(deletedBuilding);
 
-    process.stdout.write('\n ...building was deleted\n\n');
+    if (deletedBuilding) {
+        process.stdout.write('\n ...building was deleted\n\n');
+    }
+
     return true;
 };
 
