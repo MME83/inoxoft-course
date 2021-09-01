@@ -28,7 +28,7 @@ npm start or node src/server.js
 ```
 
 ### Check in Postman
-```
+
 1.1. download postman for teesting CRUD methods: https://www.postman.com/downloads/
 1.2. server response: 'http://localhost:5000'
 
@@ -46,7 +46,7 @@ npm start or node src/server.js
 
 4.1. login: 'http://localhost:5000/auth/login' use post method (us login as 'email', password)
 4.2. register: 'http://localhost:5000/auth/signup' use post method
-```
+
 
 
 
