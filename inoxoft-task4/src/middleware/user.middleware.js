@@ -1,10 +1,9 @@
-const { Users } = require('../resources/models');
-
 const CustomError = require('../errors/errorHandler');
 const HttpStatusCode = require('../common/statusCodes');
 
 const asyncWrapper = require('./asyncWrapper');
 
+const { getUserByEmail, getUserById } = require('../resources/services/user.services');
 const { uservalidator } = require('../util');
 
 module.exports = {
@@ -24,7 +23,7 @@ module.exports = {
     isEmailExists: asyncWrapper(async (req, res, next) => {
         const { email } = req.body;
 
-        const user = await Users.findOne({ email }).exec();
+        const user = await getUserByEmail({ email });
 
         if (user) throw new CustomError(HttpStatusCode.CONFLICT, `The email: ${email} is already exists`);
 
@@ -34,7 +33,7 @@ module.exports = {
     isUserByLoginExists: asyncWrapper(async (req, res, next) => {
         const { login } = req.body;
 
-        const user = await Users.findOne({ email: `${login}` }).exec();
+        const user = await getUserByEmail({ email: `${login}` });
 
         if (!user) throw new CustomError(HttpStatusCode.NOT_FOUND, 'User not found');
 
@@ -56,7 +55,7 @@ module.exports = {
     isUserByIdExists: asyncWrapper(async (req, res, next) => {
         const { user_id } = req.params;
 
-        const user = await Users.findById(user_id);
+        const user = await getUserById(user_id);
 
         if (!user) throw new CustomError(HttpStatusCode.NOT_FOUND, 'User not found');
 

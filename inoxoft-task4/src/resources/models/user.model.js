@@ -7,6 +7,7 @@ class User {
         role = 'user',
         createdAt = 'data',
         updatedAt = 'data',
+        flats = [],
     } = {}) {
         this.id = _id;
         this.name = name;
@@ -15,6 +16,7 @@ class User {
         this.role = role;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.flats = flats;
     }
 
     static toResponse(user) {
@@ -23,7 +25,8 @@ class User {
             name,
             email,
             role,
-            createdAt
+            createdAt,
+            flats,
         } = user;
 
         return {
@@ -31,7 +34,8 @@ class User {
             name,
             email,
             role,
-            createdAt
+            createdAt,
+            flats
         };
     }
 }

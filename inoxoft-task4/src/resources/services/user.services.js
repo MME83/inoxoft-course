@@ -2,13 +2,8 @@ const { hashPassword } = require('../../util');
 
 const { Users } = require('../models');
 
-const ErrorHandler = require('../../errors/errorHandler');
-const HttpStatusCode = require('../../common/statusCodes');
-
 const getAll = async () => {
     const users = await Users.find();
-
-    if (!users || users.length < 1) throw new ErrorHandler(HttpStatusCode.NOT_FOUND, 'No users found');
 
     return users;
 };
@@ -16,7 +11,11 @@ const getAll = async () => {
 const getUserById = async (id) => {
     const user = await Users.findById(id);
 
-    if (!user) throw new ErrorHandler(HttpStatusCode.NOT_FOUND, 'User not found');
+    return user;
+};
+
+const getUserByEmail = async (email) => {
+    const user = await Users.findOne(email).exec();
 
     return user;
 };
@@ -38,9 +37,10 @@ const createUser = async (userData) => {
     });
     const user = await newUser.save();
 
-    if (!user) throw new ErrorHandler(HttpStatusCode.CONFLICT, 'Can\'t create new User, try again');
+    if (user) {
+        process.stdout.write('\n ...new user created \n\n');
+    }
 
-    process.stdout.write('\n ...a new user has created \n\n');
     return user;
 };
 
@@ -59,7 +59,7 @@ const updateUserById = async (id, data) => {
         runValidators: true,
     });
 
-    if (!updatedUser) throw new ErrorHandler(HttpStatusCode.NOT_FOUND, 'User not found');
+    if (updatedUser) { process.stdout.write('\n ...user was updated \n\n'); }
 
     return updatedUser;
 };
@@ -67,15 +67,15 @@ const updateUserById = async (id, data) => {
 const deleteUserById = async (id) => {
     const deletedUser = await Users.findByIdAndDelete(id);
 
-    if (!deletedUser) throw new ErrorHandler(HttpStatusCode.NOT_FOUND, 'User not found');
+    if (deletedUser) { process.stdout.write('\n ...user was deleted\n\n'); }
 
-    process.stdout.write('\n ...user has deleted\n\n');
     return true;
 };
 
 module.exports = {
     getAll,
     getUserById,
+    getUserByEmail,
     createUser,
     updateUserById,
     deleteUserById,
