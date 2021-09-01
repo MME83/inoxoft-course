@@ -29,9 +29,9 @@ const buildingSchema = new Schema({
         require: true
     },
     tel: {
-        type: Number,
+        type: String,
         minlength: 7,
-        maxlength: 15,
+        maxlength: 10,
         trim: true
     },
     bank: {

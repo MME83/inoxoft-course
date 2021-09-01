@@ -6,7 +6,7 @@ const RegExp = require('../common/regexp.enum');
 module.exports = {
     buildingBodyJV: Joi.object({
         postalcode: Joi
-            .number().trim().min(4).max(11),
+            .number().min(4).max(11),
         city: Joi
             .string().trim().min(3).max(30),
         street: Joi
@@ -16,7 +16,7 @@ module.exports = {
             .string().trim().min(1).max(10)
             .required(),
         tel: Joi
-            .number().trim().min(7).max(15),
+            .string().trim().regex(RegExp.PHONE_REGEX),
         bank: Joi
             .string().trim().min(3).max(30),
         bank_account: Joi
@@ -27,15 +27,14 @@ module.exports = {
             .string()
             .trim()
             .regex(RegExp.EMAIL_REGEXP)
-            .required()
-            .error(() => 'email not valid'),
+            .required(),
         flats: Joi
             .array,
     }),
 
     buildingIdJV: Joi.object({
-        user_id: Joi
-            .string().trim().min(24).max(24)
+        building_id: Joi
+            .string().trim().regex(RegExp.ID_REGEX)
             .required()
     }),
 };

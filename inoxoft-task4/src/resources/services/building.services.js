@@ -14,7 +14,13 @@ const getAll = async () => {
 const getBuildingById = async (id) => {
     const building = await Buildings.findById(id);
 
-    if (!building) throw new CustomError(HttpStatusCode.NOT_FOUND, 'User not found');
+    if (!building) throw new CustomError(HttpStatusCode.NOT_FOUND, 'Building not found');
+
+    return building;
+};
+
+const getBuildingByEmail = async (email) => {
+    const building = await Buildings.findOne({ email: `${email}` }).exec();
 
     return building;
 };
@@ -51,6 +57,7 @@ const deleteBuilding = async (id) => {
 module.exports = {
     getAll,
     getBuildingById,
+    getBuildingByEmail,
     createBuilding,
     updateBuilding,
     deleteBuilding,

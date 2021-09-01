@@ -18,4 +18,12 @@ module.exports = {
         return res.status(HttpStatusCode.CREATED).json(building);
     }),
 
+    getBuildingById: asyncWrapper(async (req, res) => {
+        const { building_id } = req.params;
+
+        const building = await buildingService.getBuildingById(building_id);
+
+        return res.json(building);
+    }),
+
 };

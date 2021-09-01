@@ -47,8 +47,7 @@ module.exports = {
         user_id: Joi
             .string()
             .trim()
-            .min(24)
-            .max(24)
+            .regex(RegExp.ID_REGEX)
             .required()
     }),
 
