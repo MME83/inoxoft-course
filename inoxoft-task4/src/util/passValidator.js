@@ -1,3 +1,4 @@
+/*
 const regespEnum = require('../common/regexp.enum');
 const HttpStatusCode = require('../common/statusCodes');
 const ErrorHandler = require('../errors/errorHandler');
@@ -21,3 +22,4 @@ const isPassValid = (password) => {
 };
 
 module.exports = isPassValid;
+*/

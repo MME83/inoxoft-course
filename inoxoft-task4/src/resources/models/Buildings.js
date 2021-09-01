@@ -7,7 +7,7 @@ const buildingSchema = new Schema({
         maxlength: 11,
         trim: true
     },
-    town: {
+    city: {
         type: String,
         minlength: 3,
         maxlength: 30,
@@ -17,23 +17,25 @@ const buildingSchema = new Schema({
         type: String,
         required: true,
         minlength: 3,
+        maxlength: 30,
         trim: true
     },
     str_number: {
         type: String,
         minlength: 1,
-        maxlength: 15,
-        trim: true,
-        required: true
+        maxlength: 10,
+        trim: true
     },
     tel: {
         type: Number,
         minlength: 7,
+        maxlength: 15,
         trim: true
     },
     bank: {
         type: String,
         minlength: 3,
+        maxlength: 30,
         trim: true
     },
     bank_account: {
