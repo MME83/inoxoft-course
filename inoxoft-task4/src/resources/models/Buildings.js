@@ -18,13 +18,15 @@ const buildingSchema = new Schema({
         required: true,
         minlength: 3,
         maxlength: 30,
-        trim: true
+        trim: true,
+        require: true
     },
     str_number: {
         type: String,
         minlength: 1,
         maxlength: 10,
-        trim: true
+        trim: true,
+        require: true
     },
     tel: {
         type: Number,
