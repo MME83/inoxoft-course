@@ -28,7 +28,7 @@ npm install
 
 ### Run app
 ```
-npm start or node src/server.js
+pm2 start src/server.js || npm start || node src/server.js
 ```
 
 ### Check in Postman
