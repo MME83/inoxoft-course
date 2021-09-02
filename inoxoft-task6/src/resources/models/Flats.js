@@ -17,7 +17,7 @@ const flatSchema = new Schema({
         required: true
     },
     rooms_num: {
-        type: Number,
+        type: String,
         minlength: 1,
         maxlength: 1,
         default: RoomsNumberEnum.ONE_ROOM,
@@ -25,7 +25,7 @@ const flatSchema = new Schema({
         trim: true,
         required: true
     },
-    buildingID: {
+    building: {
         type: Schema.Types.ObjectId,
         ref: 'Buildings',
         trim: true,

@@ -1,14 +1,12 @@
 const Joi = require('joi');
 
 const RoomsNumberEnum = require('../common/room-num.enum');
+const RegExp = require('../common/regexp.enum');
 
 const getFlatByIdValidator = Joi.object({
-    flatId: Joi
-        .string()
-        .trim()
-        .min(24)
-        .max(24)
-        .required
+    flat_id: Joi
+        .string().trim().regex(RegExp.ID_REGEX)
+        .required()
 });
 
 const createFlatValidator = Joi.object({

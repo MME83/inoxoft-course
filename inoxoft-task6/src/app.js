@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { authRouter, userRouter, buildingRouter } = require('./resources/routers');
+const { authRouter, userRouter, buildingRouter, flatRouter } = require('./resources/routers');
 const handleErrors = require('./middleware/globalHandleErrors');
 
 const app = express();
@@ -20,6 +20,7 @@ app.use('/', (req, res, next) => {
 app.use('/auth', authRouter);
 app.use('/users', userRouter);
 app.use('/buildings', buildingRouter);
+app.use('/flats', flatRouter);
 app.use(handleErrors);
 
 module.exports = app;
