@@ -10,4 +10,6 @@ module.exports = {
     NODE_ENV: process.env.NODE_ENV,
     DB_PATH: process.env.DB_PATH,
     SALT: process.env.SALT,
+    SECRET_ACCESS: process.env.SECRET_ACCESS,
+    SECRET_REFRESH: process.env.SECRET_REFRESH,
 };

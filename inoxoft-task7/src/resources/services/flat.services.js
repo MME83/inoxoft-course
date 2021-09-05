@@ -54,7 +54,6 @@ const updateFlat = async (id, flatData = {}) => {
 // const getFlatsByStreetEndNum;
 // const getFlatsByOwnerId;
 
-// const getFlatById;
 // const getFlatByOwnerId;
 
 /*
