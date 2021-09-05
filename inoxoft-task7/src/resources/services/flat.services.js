@@ -20,22 +20,30 @@ const createFlat = async (flatData) => {
 };
 
 const getFlatById = async (id) => {
-    const flat = await Flats.findOne(id);
+    const flat = await Flats.findOne({ _id: `${id}` });
 
     return flat;
 };
 
-const updateFlat = async (id, flatData) => {
-    await Users.deleteMany({ _id: flatData.owners }, { $pull: { flats: id } });
+const updateFlat = async (id, flatData = {}) => {
+    const flat = await getFlatById(id);
 
     const updatedFlat = await Flats.findByIdAndUpdate(id, flatData, {
         new: true,
         runValidators: true,
     });
 
-    await Users.updateMany({ _id: updatedFlat.owners }, { $push: { flats: updatedFlat._id } });
-
     if (updatedFlat) {
+        if (flatData.owners) {
+            await Users.updateMany({}, { $pull: { flats: flat._id } }, { multi: true });
+            await Users.updateMany({ _id: updatedFlat.owners }, { $push: { flats: updatedFlat._id } });
+        }
+
+        if (flatData.building) {
+            await Buildings.updateOne({ _id: flat.building }, { $pull: { flats: flat._id } }, { multi: true });
+            await Buildings.updateOne({ _id: updatedFlat.Building }, { $push: { flats: updatedFlat._id } });
+        }
+
         process.stdout.write('\n ...flat updated \n\n');
     }
 
