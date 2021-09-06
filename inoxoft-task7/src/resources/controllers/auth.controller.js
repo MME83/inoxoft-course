@@ -1,4 +1,5 @@
 const User = require('../models/user.model');
+
 const HttpStatusCode = require('../../common/statusCodes');
 
 const authService = require('../services/auth.services');
@@ -17,9 +18,15 @@ module.exports = {
 
         const tokenPair = jwtService.generateTokenPair();
 
+        await jwtService.createTokenInBd(tokenPair, user._id);
+
         return res.status(HttpStatusCode.OK).json({
             ...tokenPair,
             user: User.toResponse(user),
         });
+    }),
+
+    logout: asyncWrapper((req, res) => {
+        res.json('OK');
     }),
 };

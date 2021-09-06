@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { SECRET_ACCESS, SECRET_REFRESH } = require('../../common/config');
+const { OAuth } = require('../models');
 
 const CustomError = require('../../errors/errorHandler');
 const HttpStatusCode = require('../../common/statusCodes');
@@ -7,10 +8,10 @@ const HttpStatusCode = require('../../common/statusCodes');
 module.exports = {
 
     generateTokenPair: () => {
-        const accessToken = jwt.sign({}, SECRET_ACCESS, { expiresIn: '15m' });
-        const refreshToken = jwt.sign({}, SECRET_REFRESH, { expiresIn: '31d' });
+        const access_token = jwt.sign({}, SECRET_ACCESS, { expiresIn: '15m' });
+        const refresh_token = jwt.sign({}, SECRET_REFRESH, { expiresIn: '31d' });
 
-        return { accessToken, refreshToken };
+        return { access_token, refresh_token };
     },
 
     verifyToken: (token, tokenType = 'access') => {
@@ -22,4 +23,14 @@ module.exports = {
             throw new CustomError(HttpStatusCode.UNAUTHORISED, 'Invalid token');
         }
     },
+
+    createTokenInBd: async (tokenPair, user_id) => {
+        const createToken = await OAuth.create({ ...tokenPair, user: user_id });
+
+        if (!createToken) {
+            throw new CustomError(HttpStatusCode.BAD_REQUEST, 'Can\'t create tokens pair, try again...');
+        }
+
+        process.stdout.write('\n ...new tokens pair created in BD \n\n');
+    }
 };
