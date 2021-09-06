@@ -16,9 +16,17 @@ const userLogin = async (password, bdpass) => {
 
 // logout from one device (use access_token: token) or all (use Users: _id)
 const userLogout = async (OAuthField = AOuthModelFieldsEnum.AOUTH_FIELD_AT, tokenORid) => {
-    const tokenDeleted = await OAuth.deleteOne({ [OAuthField]: tokenORid });
+    if (OAuthField === AOuthModelFieldsEnum.AOUTH_FIELD_AT) {
+        const tokenDeleted = await OAuth.deleteOne({ [OAuthField]: tokenORid });
 
-    if (!tokenDeleted) throw new CustomError(HttpStatusCode.BAD_REQUEST, 'Token in DB not found');
+        if (!tokenDeleted) throw new CustomError(HttpStatusCode.BAD_REQUEST, 'Token in DB not found');
+
+        return true;
+    }
+
+    const tokenDeleted = await OAuth.deleteMany({ [OAuthField]: tokenORid });
+
+    if (!tokenDeleted) throw new CustomError(HttpStatusCode.BAD_REQUEST, 'Tokens in DB not found');
 
     return true;
 };
