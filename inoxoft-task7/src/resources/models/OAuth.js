@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const dbTablesEnum = require('../../db/dbTablesEnum');
 
 const OAuthSchema = new Schema({
     access_token: {
@@ -9,11 +10,11 @@ const OAuthSchema = new Schema({
         type: String,
         required: true
     },
-    user: {
+    [dbTablesEnum.USERS]: {
         type: Schema.Types.ObjectId,
         reuired: true,
-        ref: 'Users'
+        ref: dbTablesEnum.USERS
     }
 }, { timestamps: true });
 
-module.exports = model('OAuth', OAuthSchema);
+module.exports = model(dbTablesEnum.OAUTH, OAuthSchema);

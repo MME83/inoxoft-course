@@ -1,6 +1,7 @@
 const User = require('../models/user.model');
 
 const HttpStatusCode = require('../../common/statusCodes');
+const constants = require('../../common/constants');
 
 const authService = require('../services/auth.services');
 const jwtService = require('../services/jwt.services');
@@ -26,7 +27,11 @@ module.exports = {
         });
     }),
 
-    logout: asyncWrapper((req, res) => {
-        res.json('OK');
+    logout: asyncWrapper(async (req, res) => {
+        const token = req.get(constants.AUTHORIZATION);
+
+        await authService.userLogout(token);
+
+        res.status(HttpStatusCode.NO_CONTENT).send('OK');
     }),
 };

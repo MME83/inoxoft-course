@@ -25,7 +25,7 @@ module.exports = {
     },
 
     createTokenInBd: async (tokenPair, user_id) => {
-        const createToken = await OAuth.create({ ...tokenPair, user: user_id });
+        const createToken = await OAuth.create({ ...tokenPair, Users: user_id });
 
         if (!createToken) {
             throw new CustomError(HttpStatusCode.BAD_REQUEST, 'Can\'t create tokens pair, try again...');
