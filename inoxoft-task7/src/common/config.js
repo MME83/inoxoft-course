@@ -12,4 +12,6 @@ module.exports = {
     SALT: process.env.SALT,
     SECRET_ACCESS: process.env.SECRET_ACCESS,
     SECRET_REFRESH: process.env.SECRET_REFRESH,
+    FADMIN_LOG: process.env.FADMIN_LOG,
+    FADMIN_PAS: process.env.FADMIN_PAS,
 };

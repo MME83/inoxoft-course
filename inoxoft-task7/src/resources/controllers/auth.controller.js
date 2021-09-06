@@ -34,4 +34,21 @@ module.exports = {
 
         res.status(HttpStatusCode.NO_CONTENT).send('OK');
     }),
+
+    refreshToken: asyncWrapper(async (req, res) => {
+        const token = req.get(constants.AUTHORIZATION);
+
+        const { userLogged } = req;
+
+        await authService.refreshToken(token);
+
+        const tokenPair = jwtService.generateTokenPair();
+
+        await jwtService.createTokenInBd(tokenPair, userLogged._id);
+
+        return res.status(HttpStatusCode.OK).json({
+            ...tokenPair,
+            user: User.toResponse(userLogged),
+        });
+    }),
 };

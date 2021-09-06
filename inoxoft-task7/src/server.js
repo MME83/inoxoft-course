@@ -1,7 +1,14 @@
 const app = require('./app');
 
-const { DB_PATH, PORT } = require('./common/config');
+const {
+    DB_PATH,
+    PORT,
+    FADMIN_LOG,
+    FADMIN_PAS
+} = require('./common/config');
+
 const dbConnection = require('./db/dbConnection');
+const { createFirstAdmin } = require('./db/dbCreateFirstAdmin');
 
 const start = async () => {
     try {
@@ -9,6 +16,8 @@ const start = async () => {
 
         if (connect) {
             process.stdout.write('MongoDB connected!\n\n');
+
+            await createFirstAdmin(FADMIN_LOG, FADMIN_PAS);
 
             app.listen(PORT, () => {
                 process.stdout.write(`App is running on http://localhost:${PORT}\n\n`);

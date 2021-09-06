@@ -32,4 +32,28 @@ module.exports = {
             next(err);
         }
     },
+
+    checkRefreshToken: async (req, res, next) => {
+        try {
+            const token = req.get(constants.AUTHORIZATION);
+
+            if (!token) {
+                throw new CustomError(HttpStatusCode.UNAUTHORISED, 'No token');
+            }
+
+            jwtServices.verifyToken(token, 'refresh');
+
+            const tokenInDB = await OAuth.findOne({ refresh_token: token }).populate(dbTablesEnum.USERS);
+
+            if (!tokenInDB) {
+                throw new CustomError(HttpStatusCode.UNAUTHORISED, 'Invalid token');
+            }
+
+            req.userLogged = tokenInDB.Users;
+
+            next();
+        } catch (err) {
+            next(err);
+        }
+    },
 };

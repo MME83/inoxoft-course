@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 
 const CustomError = require('../../errors/errorHandler');
 const HttpStatusCode = require('../../common/statusCodes');
+const AOuthModelFieldsEnum = require('../../common/AOuthModelFieldsEnum');
 
 const { OAuth } = require('../models');
 
@@ -13,8 +14,17 @@ const userLogin = async (password, bdpass) => {
     return true;
 };
 
-const userLogout = async (token) => {
-    const tokenDeleted = await OAuth.deleteOne({ access_token: token });
+// logout from one device (use access_token: token) or all (use Users: _id)
+const userLogout = async (OAuthField = AOuthModelFieldsEnum.AOUTH_FIELD_AT, tokenORid) => {
+    const tokenDeleted = await OAuth.deleteOne({ [OAuthField]: tokenORid });
+
+    if (!tokenDeleted) throw new CustomError(HttpStatusCode.BAD_REQUEST, 'Token in DB not found');
+
+    return true;
+};
+
+const refreshToken = async (refresh_token, token) => {
+    const tokenDeleted = await OAuth.deleteOne({ [refresh_token]: token });
 
     if (!tokenDeleted) throw new CustomError(HttpStatusCode.BAD_REQUEST, 'Token in DB not found');
 
@@ -24,4 +34,5 @@ const userLogout = async (token) => {
 module.exports = {
     userLogin,
     userLogout,
+    refreshToken,
 };
