@@ -21,7 +21,7 @@
 
 ```
 
-### Download PR `inoxoft-course` from git to your PC and unzip folder `inoxoft-task7` !!!
+### Download PR `inoxoft-course` from git to your PC and unzip folder `inoxoft-task7`, rename file `.env.example` to `.env` !!!
 
 ```
 
