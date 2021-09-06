@@ -1,3 +1,4 @@
+const User = require('../models/user.model');
 const HttpStatusCode = require('../../common/statusCodes');
 
 const authService = require('../services/auth.services');
@@ -8,7 +9,7 @@ const asyncWrapper = require('../../middleware/asyncWrapper');
 module.exports = {
 
     userLogin: asyncWrapper(async (req, res) => {
-        // login = email
+        // login = email - checked for exist with previous middleware in route
         const { password } = req.body;
         const { user } = req;
 
@@ -18,7 +19,7 @@ module.exports = {
 
         return res.status(HttpStatusCode.OK).json({
             ...tokenPair,
-            user: 'Success!'
+            user: User.toResponse(user),
         });
     }),
 };

@@ -1,13 +1,13 @@
-# InoXoft Task-6
+# InoXoft Task-7
 
-### Use pm2 + dotenv
+### Use jwt, create 2 tokens
 
 1. Methods: 
 - create, get all, get one by id/login/email, delete, update;
 2. Models/schema:
 - users (admin & user role)
 - buildings (includs [flats_id's])
-- NOT RELISED YET!!! -- > flats (includs [users_id's], [building_id])
+- almost RELISED!!! -- > flats (includs [users_id's], [building_id])
 - user-model response to user without pass (used custom class Users)
 - auth (login and signUP/register)
 
@@ -15,7 +15,7 @@
 
 ```
 
-### Download PR `inoxoft-course` from git to your PC and unzip folder `inoxoft-task6` !!!
+### Download PR `inoxoft-course` from git to your PC and unzip folder `inoxoft-task7` !!!
 
 ```
 
