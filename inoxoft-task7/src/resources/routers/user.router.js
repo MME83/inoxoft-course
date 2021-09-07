@@ -3,7 +3,7 @@ const router = require('express').Router();
 const user_role = require('../../common/user-role.enum');
 
 const { checkAccessToken } = require('../../middleware/auth.middleware');
-const { checkUserRole } = require('../../middleware/role.middleware');
+const { checkUserRole, checkRoleAndIdAccess } = require('../../middleware/role.middleware');
 const userMiddleware = require('../../middleware/user.middleware');
 
 const userController = require('../controllers/user.controller');
@@ -27,10 +27,7 @@ router.post(
 router.get(
     '/:user_id',
     checkAccessToken,
-    checkUserRole([
-        user_role.ADMIN,
-        user_role.USER
-    ]),
+    checkRoleAndIdAccess(user_role.USER),
     userMiddleware.isUserIdValid,
     userController.getUserById
 );
@@ -38,10 +35,7 @@ router.get(
 router.patch(
     '/:user_id',
     checkAccessToken,
-    checkUserRole([
-        user_role.ADMIN,
-        user_role.USER
-    ]),
+    checkRoleAndIdAccess(user_role.USER),
     userMiddleware.isUserIdValid,
     userMiddleware.isReqBodyUpdateValid,
     userMiddleware.isUserByIdExists,

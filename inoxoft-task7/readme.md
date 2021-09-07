@@ -46,7 +46,10 @@ npm start
 ```
 1.1. download postman for teesting CRUD methods: https://www.postman.com/downloads/
 1.2. server response: 'http://localhost:5000'
-*look src/resources/routers for admin or user access below (using tokens)
+
+*look src/resources/routers for admin or user access below (using tokens), 
+**'get user by id' or 'update user' can only Admin or User with the same Id
+
 2.1. users (list of all users): 'http://localhost:5000/users' use get method  
 2.2. one user: 'http://localhost:5000/users/user_id' use get method
 2.3. create user: 'http://localhost:5000/users' use post method with json format
