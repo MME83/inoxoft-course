@@ -14,4 +14,6 @@ module.exports = {
     SECRET_REFRESH: process.env.SECRET_REFRESH,
     FADMIN_LOG: process.env.FADMIN_LOG,
     FADMIN_PAS: process.env.FADMIN_PAS,
+    EM_LOGIN: process.env.EM_LOGIN,
+    EM_PASS: process.env.EM_PASS
 };
