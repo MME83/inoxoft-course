@@ -3,7 +3,7 @@ const EmailTemplates = require('email-templates');
 const path = require('path');
 
 const templatesInfo = require('../../templates');
-const { EM_LOGIN, EM_PASS, EM_FRONT_URL, EM_FRONT_LOGIN } = require('../../common/config');
+const { EM_LOGIN, EM_PASS, EM_FRONT_URL2 } = require('../../common/config');
 
 const ErrorHandler = require('../../errors/errorHandler');
 const HttpStatusCode = require('../../common/statusCodes');
@@ -24,7 +24,7 @@ const transporter = nodemailer.createTransport({
 
 const sendMail = async (userMail, emailAction, context = {}) => {
     const templateToSend = templatesInfo[emailAction];
-    const contextData = { ...context, frontendLoginUrl: EM_FRONT_LOGIN, frontendURL: EM_FRONT_URL };
+    const contextData = { ...context, frontendURL2: EM_FRONT_URL2 };
 
     if (!templateToSend) {
         throw new ErrorHandler(HttpStatusCode.SERVER_ERROR, 'Wrong template name');

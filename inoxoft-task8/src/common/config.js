@@ -12,10 +12,12 @@ module.exports = {
     SALT: process.env.SALT,
     SECRET_ACCESS: process.env.SECRET_ACCESS,
     SECRET_REFRESH: process.env.SECRET_REFRESH,
+    SECRET_ACTION: process.env.SECRET_ACTION,
+    SECRET_ACTION_PASS: process.env.SECRET_ACTION_PASS,
     FADMIN_LOG: process.env.FADMIN_LOG,
     FADMIN_PAS: process.env.FADMIN_PAS,
     EM_LOGIN: process.env.EM_LOGIN,
     EM_PASS: process.env.EM_PASS,
-    EM_FRONT_LOGIN: process.env.EM_FRONT_LOGIN,
     EM_FRONT_URL: process.env.EM_FRONT_URL,
+    EM_FRONT_URL2: process.env.EM_FRONT_URL2,
 };

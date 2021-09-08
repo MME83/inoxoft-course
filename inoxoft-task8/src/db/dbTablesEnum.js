@@ -3,4 +3,5 @@ module.exports = {
     FLATS: 'Flats',
     BUILDING: 'Buildings',
     OAUTH: 'OAuth',
+    ATOKEN: 'Atoken'
 };

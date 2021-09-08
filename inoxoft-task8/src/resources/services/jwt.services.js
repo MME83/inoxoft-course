@@ -1,6 +1,14 @@
 const jwt = require('jsonwebtoken');
-const { SECRET_ACCESS, SECRET_REFRESH } = require('../../common/config');
-const { OAuth } = require('../models');
+
+const {
+    SECRET_ACCESS,
+    SECRET_REFRESH,
+    SECRET_ACTION,
+    SECRET_ACTION_PASS
+} = require('../../common/config');
+const actionTypesEnum = require('../../common/actionTypes.enum');
+
+const { OAuth, Atoken } = require('../models');
 
 const CustomError = require('../../errors/errorHandler');
 const HttpStatusCode = require('../../common/statusCodes');
@@ -32,5 +40,49 @@ module.exports = {
         }
 
         process.stdout.write('\n ...new tokens pair created in BD \n\n');
-    }
+    },
+
+    generateActionToken: (actionType) => {
+        let secretWord = '';
+
+        switch (actionType) {
+            case actionTypesEnum.FORGOT_PASS:
+                secretWord = SECRET_ACTION;
+                break;
+            case actionTypesEnum.FIRST_PASS:
+                secretWord = SECRET_ACTION_PASS;
+                break;
+            default:
+                throw new CustomError(HttpStatusCode.SERVER_ERROR, 'Wrong actionType');
+        }
+
+        return jwt.sign({ actionType }, secretWord, { expiresIn: '7d' });
+    },
+
+    verifyActionToken: (actionType, actionToken) => {
+        let secretWord = '';
+
+        switch (actionType) {
+            case actionTypesEnum.FORGOT_PASS:
+                secretWord = SECRET_ACTION;
+                break;
+            case actionTypesEnum.FIRST_PASS:
+                secretWord = SECRET_ACTION_PASS;
+                break;
+            default:
+                throw new CustomError(HttpStatusCode.SERVER_ERROR, 'Wrong actionType');
+        }
+
+        return jwt.verify(actionToken, secretWord);
+    },
+
+    createActionTokenInBd: async (actionToken, user_id) => {
+        const createToken = await Atoken.create({ action_token: actionToken, Users: user_id });
+
+        if (!createToken) {
+            throw new CustomError(HttpStatusCode.BAD_REQUEST, 'Can\'t create tokens pair, try again...');
+        }
+
+        process.stdout.write('\n ...new action token created in BD \n\n');
+    },
 };

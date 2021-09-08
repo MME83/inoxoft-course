@@ -1,8 +1,9 @@
 const { User } = require('../models');
 
-const { AOUTH_FIELD_UR } = require('../../common/AOuthModelFieldsEnum');
+const { AOUTH_FIELD_UR } = require('../../common/modelsFields.enum');
 const emailActionsEnum = require('../../common/emailActions.enum');
 const HttpStatusCode = require('../../common/statusCodes');
+const { EM_FRONT_URL } = require('../../common/config');
 
 const { authService, userService, emailService } = require('../services');
 
@@ -42,7 +43,12 @@ module.exports = {
         await emailService.sendMail(
             user.email,
             emailActionsEnum.CREATE_ACCOUNT,
-            { login: user.email, password: req.body.password, userName: user.name }
+            {
+                login: user.email,
+                password: req.body.password,
+                userName: user.name,
+                frontendLoginUrl: `${EM_FRONT_URL}/auth/login`,
+            }
         );
 
         return res.status(HttpStatusCode.CREATED).json(User.toResponse(user));

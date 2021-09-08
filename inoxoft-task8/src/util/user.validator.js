@@ -56,4 +56,9 @@ module.exports = {
         password: Joi
             .string().trim().regex(RegExp.PASS_REGEXP)
     }),
+
+    passwordValidator: Joi.object({
+        password: Joi
+            .string().trim().regex(RegExp.PASS_REGEXP)
+    })
 };

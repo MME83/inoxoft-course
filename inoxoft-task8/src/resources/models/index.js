@@ -7,4 +7,5 @@ module.exports = {
     Buildings: require('./Buildings'),
     Flats: require('./Flats'),
     OAuth: require('./OAuth'),
+    Atoken: require('./ActionToken'),
 };

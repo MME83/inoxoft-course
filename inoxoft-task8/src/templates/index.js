@@ -1,4 +1,9 @@
-const { CREATE_ACCOUNT, UPDATE_ACCOUNT, FORGOT_PASSWORD, REGISTER_USER } = require('../common/emailActions.enum');
+const {
+    CREATE_ACCOUNT,
+    UPDATE_ACCOUNT,
+    FORGOT_PASSWORD,
+    REGISTER_USER
+} = require('../common/emailActions.enum');
 
 module.exports = {
     [CREATE_ACCOUNT]: {
