@@ -1,8 +1,7 @@
-const flatService = require('../services/flat.services');
+const { flatService } = require('../services');
+const asyncWrapper = require('../../middleware/asyncWrapper');
 
 const HttpStatusCode = require('../../common/statusCodes');
-
-const asyncWrapper = require('../../middleware/asyncWrapper');
 
 module.exports = {
 

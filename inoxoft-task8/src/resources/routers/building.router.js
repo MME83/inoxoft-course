@@ -2,18 +2,16 @@ const router = require('express').Router();
 
 const user_role = require('../../common/user-role.enum');
 
-const { checkAccessToken } = require('../../middleware/auth.middleware');
-const { checkUserRole } = require('../../middleware/role.middleware');
-const buildingMiddleware = require('../../middleware/building.middleware');
+const { authMiddleware, roleMiddleware, buildingMiddleware } = require('../../middleware');
 
-const buildingController = require('../controllers/building.controller');
+const { buildingController } = require('../controllers');
 
 router.get('/', buildingController.getAllBuildings);
 
 router.post(
     '/',
-    checkAccessToken,
-    checkUserRole([user_role.ADMIN]),
+    authMiddleware.checkAccessToken,
+    roleMiddleware.checkUserRole([user_role.ADMIN]),
     buildingMiddleware.isReqBodyValid,
     buildingMiddleware.isEmailUnique,
     buildingController.createBuilding
@@ -27,8 +25,8 @@ router.get(
 
 router.patch(
     '/:building_id',
-    checkAccessToken,
-    checkUserRole([user_role.ADMIN]),
+    authMiddleware.checkAccessToken,
+    roleMiddleware.checkUserRole([user_role.ADMIN]),
     buildingMiddleware.isBuildingIdValid,
     buildingMiddleware.isBuildingUpdReqBodyValid,
     buildingMiddleware.isBuildingByIdExists,
@@ -38,8 +36,8 @@ router.patch(
 
 router.delete(
     '/:building_id',
-    checkAccessToken,
-    checkUserRole([user_role.ADMIN]),
+    authMiddleware.checkAccessToken,
+    roleMiddleware.checkUserRole([user_role.ADMIN]),
     buildingMiddleware.isBuildingIdValid,
     buildingMiddleware.isBuildingByIdExists,
     buildingController.deleteBuilding

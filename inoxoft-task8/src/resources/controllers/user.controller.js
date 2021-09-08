@@ -1,11 +1,10 @@
 const { User } = require('../models');
 
 const { AOUTH_FIELD_UR } = require('../../common/AOuthModelFieldsEnum');
+const emailActionsEnum = require('../../common/emailActions.enum');
 const HttpStatusCode = require('../../common/statusCodes');
 
-const userService = require('../services/user.services');
-const { sendMail } = require('../services/email.services');
-const { userLogout } = require('../services/auth.services');
+const { authService, userService, emailService } = require('../services');
 
 const asyncWrapper = require('../../middleware/asyncWrapper');
 
@@ -40,7 +39,7 @@ module.exports = {
             return res.status(HttpStatusCode.CONFLICT).send({ message: 'Can\'t create new User, try again' });
         }
 
-        sendMail(String(user.email));
+        await emailService.sendMail(user.email, emailActionsEnum.CREATE_ACCOUNT, { userName: user.name });
 
         return res.status(HttpStatusCode.CREATED).json(User.toResponse(user));
     }),
@@ -55,7 +54,7 @@ module.exports = {
         }
 
         // delete all tokens from BD with user._id
-        await userLogout(AOUTH_FIELD_UR, user_id);
+        await authService.userLogout(AOUTH_FIELD_UR, user_id);
 
         return res.status(HttpStatusCode.OK).json(User.toResponse(user));
     }),
@@ -70,7 +69,7 @@ module.exports = {
         }
 
         // delete all tokens from BD with user._id
-        await userLogout(AOUTH_FIELD_UR, user_id);
+        await authService.userLogout(AOUTH_FIELD_UR, user_id);
 
         return res.status(HttpStatusCode.OK).send({ message: 'User has deleted' });
     }),

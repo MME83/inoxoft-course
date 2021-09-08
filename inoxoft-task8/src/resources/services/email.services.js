@@ -1,6 +1,18 @@
 const nodemailer = require('nodemailer');
+const EmailTemplates = require('email-templates');
+const path = require('path');
 
-const { EM_LOGIN, EM_PASS } = require('../../common/config');
+const templatesInfo = require('../../templates');
+const { EM_LOGIN, EM_PASS, EM_FRONT_URL } = require('../../common/config');
+
+const ErrorHandler = require('../../errors/errorHandler');
+const HttpStatusCode = require('../../common/statusCodes');
+
+const templateParser = new EmailTemplates({
+    views: {
+        root: path.join(process.cwd(), 'src/templates')
+    }
+});
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -10,20 +22,27 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-const sendMail = (userMail) => {
+const sendMail = async (userMail, emailAction, context = {}) => {
+    const templateToSend = templatesInfo[emailAction];
+    const contextData = { ...context, frontendURL: EM_FRONT_URL };
+
+    if (!templateToSend) {
+        throw new ErrorHandler(HttpStatusCode.SERVER_ERROR, 'Wrong template name');
+    }
+
+    const { templateName, subject } = templateToSend;
+
+    const html = await templateParser.render(templateName, contextData);
+
     try {
-        const sendmail = transporter.sendMail({
+        transporter.sendMail({
             from: 'No reply',
             to: userMail,
-            subject: 'HELLO WORLD',
-            html: '<h1>TEST</h1>'
+            subject,
+            html
         });
-
-        if (!sendmail) {
-            return console.log('bida');
-        }
     } catch (err) {
-        throw new Error(500, err);
+        throw new ErrorHandler(HttpStatusCode.SERVER_ERROR, err);
     }
 };
 

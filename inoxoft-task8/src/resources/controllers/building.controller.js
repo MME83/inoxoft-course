@@ -1,6 +1,6 @@
 const HttpStatusCode = require('../../common/statusCodes');
 
-const buildingService = require('../services/building.services');
+const { buildingService } = require('../services');
 
 const asyncWrapper = require('../../middleware/asyncWrapper');
 

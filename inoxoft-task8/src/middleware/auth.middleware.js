@@ -4,7 +4,7 @@ const dbTablesEnum = require('../db/dbTablesEnum');
 const CustomError = require('../errors/errorHandler');
 const HttpStatusCode = require('../common/statusCodes');
 
-const jwtServices = require('../resources/services/jwt.services');
+const { jwtService } = require('../resources/services');
 const { OAuth } = require('../resources/models');
 
 module.exports = {
@@ -17,7 +17,7 @@ module.exports = {
                 throw new CustomError(HttpStatusCode.UNAUTHORISED, 'No token');
             }
 
-            jwtServices.verifyToken(token);
+            jwtService.verifyToken(token);
 
             const tokenInDB = await OAuth.findOne({ access_token: token }).populate(dbTablesEnum.USERS);
 
@@ -41,7 +41,7 @@ module.exports = {
                 throw new CustomError(HttpStatusCode.UNAUTHORISED, 'No token');
             }
 
-            jwtServices.verifyToken(token, 'refresh');
+            jwtService.verifyToken(token, 'refresh');
 
             const tokenInDB = await OAuth.findOne({ refresh_token: token }).populate(dbTablesEnum.USERS);
 

@@ -3,8 +3,7 @@ const User = require('../models/user.model');
 const HttpStatusCode = require('../../common/statusCodes');
 const constants = require('../../common/constants');
 
-const authService = require('../services/auth.services');
-const jwtService = require('../services/jwt.services');
+const { authService, jwtService } = require('../services');
 
 const asyncWrapper = require('../../middleware/asyncWrapper');
 

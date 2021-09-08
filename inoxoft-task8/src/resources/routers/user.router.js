@@ -2,23 +2,21 @@ const router = require('express').Router();
 
 const user_role = require('../../common/user-role.enum');
 
-const { checkAccessToken } = require('../../middleware/auth.middleware');
-const { checkUserRole, checkRoleAndIdAccess } = require('../../middleware/role.middleware');
-const userMiddleware = require('../../middleware/user.middleware');
+const { authMiddleware, roleMiddleware, userMiddleware } = require('../../middleware');
 
-const userController = require('../controllers/user.controller');
+const { userController } = require('../controllers');
 
 router.get(
     '/',
-    checkAccessToken,
-    checkUserRole([user_role.ADMIN]),
+    authMiddleware.checkAccessToken,
+    roleMiddleware.checkUserRole([user_role.ADMIN]),
     userController.getAllUsers
 );
 
 router.post(
     '/',
-    checkAccessToken,
-    checkUserRole([user_role.ADMIN]),
+    authMiddleware.checkAccessToken,
+    roleMiddleware.checkUserRole([user_role.ADMIN]),
     userMiddleware.isReqBodyInSignupValid,
     userMiddleware.isEmailExists,
     userController.createUser
@@ -26,16 +24,16 @@ router.post(
 
 router.get(
     '/:user_id',
-    checkAccessToken,
-    checkRoleAndIdAccess(user_role.USER),
+    authMiddleware.checkAccessToken,
+    roleMiddleware.checkRoleAndIdAccess(user_role.USER),
     userMiddleware.isUserIdValid,
     userController.getUserById
 );
 
 router.patch(
     '/:user_id',
-    checkAccessToken,
-    checkRoleAndIdAccess(user_role.USER),
+    authMiddleware.checkAccessToken,
+    roleMiddleware.checkRoleAndIdAccess(user_role.USER),
     userMiddleware.isUserIdValid,
     userMiddleware.isReqBodyUpdateValid,
     userMiddleware.isUserByIdExists,
@@ -45,8 +43,8 @@ router.patch(
 
 router.delete(
     '/:user_id',
-    checkAccessToken,
-    checkUserRole([user_role.ADMIN]),
+    authMiddleware.checkAccessToken,
+    roleMiddleware.checkUserRole([user_role.ADMIN]),
     userMiddleware.isUserIdValid,
     userMiddleware.isUserByIdExists,
     userController.deleteUser
