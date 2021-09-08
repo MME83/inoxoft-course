@@ -16,5 +16,6 @@ module.exports = {
     FADMIN_PAS: process.env.FADMIN_PAS,
     EM_LOGIN: process.env.EM_LOGIN,
     EM_PASS: process.env.EM_PASS,
+    EM_FRONT_LOGIN: process.env.EM_FRONT_LOGIN,
     EM_FRONT_URL: process.env.EM_FRONT_URL,
 };
