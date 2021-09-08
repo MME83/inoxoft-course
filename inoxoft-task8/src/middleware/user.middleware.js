@@ -10,6 +10,18 @@ module.exports = {
 
     isReqBodyInSignupValid: asyncWrapper(async (req, res, next) => {
         try {
+            const value = await uservalidator.regUserValidator.validateAsync(req.body);
+
+            req.body = value;
+
+            next();
+        } catch (error) {
+            throw new CustomError(HttpStatusCode.BAD_REQUEST, error.details[0].message);
+        }
+    }),
+
+    isReqBodyInCreateUserValid: asyncWrapper(async (req, res, next) => {
+        try {
             const value = await uservalidator.createUserValidator.validateAsync(req.body);
 
             req.body = value;

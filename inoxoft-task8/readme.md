@@ -7,15 +7,18 @@
 2. Models/schema:
 - users (admin & user role)
 - buildings (includs [flats_id's])
-- *almost RELISED (no validation by body and delete method)!!! -- > flats (includs [users_id's], [building_id])
+- *almost RELISED (no validation by body)!!! -- > flats (includs [users_id's], [building_id])
 - user-model response to user without pass (used custom class Users)
 - oauth (tokenization, with user_id)
 3. Routes:
 - /
-- auth/login|loginout|refresh
+- auth/signup|login|loginout|refresh
 - users/, users/user_id
 - buildings/, buildings/building_id
 - flats/, flats/flat_id 
+4. Mails:
+- send email with login&pass when admin create new user|admin account
+- send email with login when user register new account
 
 ```
 
@@ -64,7 +67,7 @@ npm start
 4.2. one flat: 'http://localhost:5000/flats/flat_id' use get method
 4.3. create flat: 'http://localhost:5000/flats' use post method with json format
 4.4. update flat: 'http://localhost:5000/flats/flat_id' use patch method (if you change owners, leave old(if they still) and/or add/write new some)
-// * not relised yet! 3.5. delete building: 'http://localhost:5000/flats/flat_id' use delete method
+4.5. delete building: 'http://localhost:5000/flats/flat_id' use delete method
 5.1. login: 'http://localhost:5000/auth/login' use post method (with login as 'email', password)
 5.2. loginout: 'http://localhost:5000/auth/login' use post method (with access_token)
 5.3. refresh: 'http://localhost:5000/auth/login' use post method (with refresh_token)

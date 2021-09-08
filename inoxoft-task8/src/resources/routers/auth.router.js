@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { authController, userController } = require('../controllers');
+const { authController } = require('../controllers');
 
 const { authMiddleware, userMiddleware } = require('../../middleware');
 
@@ -8,7 +8,7 @@ router.post(
     '/signup',
     userMiddleware.isReqBodyInSignupValid,
     userMiddleware.isEmailExists,
-    userController.createUser
+    authController.signUpUser
 );
 
 router.post(

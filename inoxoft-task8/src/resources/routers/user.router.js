@@ -17,7 +17,7 @@ router.post(
     '/',
     authMiddleware.checkAccessToken,
     roleMiddleware.checkUserRole([user_role.ADMIN]),
-    userMiddleware.isReqBodyInSignupValid,
+    userMiddleware.isReqBodyInCreateUserValid,
     userMiddleware.isEmailExists,
     userController.createUser
 );

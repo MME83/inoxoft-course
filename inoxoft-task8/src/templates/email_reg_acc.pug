@@ -1,0 +1,11 @@
+extends email_container
+block content 
+    div.block
+        | HELLO #{userName}, please, do not reply on this msg
+    div.block
+        | Here is your:
+        | login/email: #{login} and pass: ******
+    div.block
+        | Now you can signIN your account: 
+        a(href='http://127.0.0.1:5000/auth/login') link to login
+        

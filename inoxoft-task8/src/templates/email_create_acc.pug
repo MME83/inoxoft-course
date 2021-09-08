@@ -1,13 +1,10 @@
 extends email_container
 block content 
-    div 
+    div.block
         | HELLO #{userName}, please, do not reply on this msg
-        br
+    div.block
         | Here is your:
-        br
         | login: #{login} and password: #{password}
-        br
-        br
-        | You should update login and password to your own, pls login and apdate your data! 
+    div.block
+        | You should update login and password to your own, pls login in and update your pass! 
         a(href='http://127.0.0.1:5000/auth/login') link to login
-        

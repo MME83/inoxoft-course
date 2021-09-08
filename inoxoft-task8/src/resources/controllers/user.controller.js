@@ -39,7 +39,11 @@ module.exports = {
             return res.status(HttpStatusCode.CONFLICT).send({ message: 'Can\'t create new User, try again' });
         }
 
-        await emailService.sendMail(user.email, emailActionsEnum.CREATE_ACCOUNT, { userName: user.name });
+        await emailService.sendMail(
+            user.email,
+            emailActionsEnum.CREATE_ACCOUNT,
+            { login: user.email, password: req.body.password, userName: user.name }
+        );
 
         return res.status(HttpStatusCode.CREATED).json(User.toResponse(user));
     }),
