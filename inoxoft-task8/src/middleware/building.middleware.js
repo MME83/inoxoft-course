@@ -16,7 +16,7 @@ module.exports = {
 
             next();
         } catch (error) {
-            throw new CustomError(HttpStatusCode.BAD_REQUEST, `${error.details[0].message}`);
+            throw new CustomError(HttpStatusCode.BAD_REQUEST, error.details[0].message);
         }
     }),
 
@@ -36,7 +36,7 @@ module.exports = {
 
             next();
         } catch (error) {
-            throw new CustomError(HttpStatusCode.BAD_REQUEST, `${error.details[0].message}`);
+            throw new CustomError(HttpStatusCode.BAD_REQUEST, error.details[0].message);
         }
     }),
 
@@ -55,7 +55,7 @@ module.exports = {
             await buildingvalidator.buildingUpdBodyJV.validateAsync(req.body);
             next();
         } catch (error) {
-            throw new CustomError(HttpStatusCode.BAD_REQUEST, `${error.details[0].message}`);
+            throw new CustomError(HttpStatusCode.BAD_REQUEST, error.details[0].message);
         }
     }),
 };
