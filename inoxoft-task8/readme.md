@@ -19,6 +19,7 @@
 4. Mails:
 - send email with login&pass when admin create new user|admin account
 - send email with login when user register new account
+- send email when user reseting his password
 
 ```
 
@@ -72,4 +73,6 @@ npm start
 5.2. loginout: 'http://localhost:5000/auth/login' use post method (with access_token)
 5.3. refresh: 'http://localhost:5000/auth/login' use post method (with refresh_token)
 5.4. register: 'http://localhost:5000/auth/signup' use post method (with body data)
+5.5. reset password: 'http://localhost:5000/auth/password/forgot/send' use post method (with body data, login=email)
+5.6. set new password for user: 'http://localhost:5000/auth/password/forgot/set' use post method (with body data, password)
 ```
