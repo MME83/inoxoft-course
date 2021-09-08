@@ -50,27 +50,30 @@ const updateFlat = async (id, flatData = {}) => {
     return updatedFlat;
 };
 
-// const getFlatsByBuildingId;
-// const getFlatsByStreetEndNum;
-// const getFlatsByOwnerId;
+const deleteFlat = async (id) => {
+    const deletedFlat = await Flats.findByIdAndDelete(id);
 
-// const getFlatByOwnerId;
+    if (deletedFlat) {
+        if (deletedFlat.owners) {
+            await Users.updateMany({}, { $pull: { flats: deletedFlat._id } }, { multi: true });
+        }
 
-/*
-const createFlat = async {flatData, buildingId, ownersIds} => {
-    return Flats.create(flatData).then(docFlats => {
-        console.log('Created Flat:\n', docFlats);
+        if (deletedFlat.building) {
+            await Buildings.updateOne({ _id: deletedFlat.building }, { $pull: { flats: deletedFlat._id } }, { multi: true });
+        }
 
-        return Users.findByIdAndUpdate(
+        process.stdout.write('\n ...flat was deleted\n\n');
 
-        )
-    })
+        return true;
+    }
+
+    return false;
 };
-*/
 
 module.exports = {
     getAllFlats,
     createFlat,
     getFlatById,
     updateFlat,
+    deleteFlat,
 };

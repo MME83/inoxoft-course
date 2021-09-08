@@ -48,4 +48,16 @@ module.exports = {
 
         return res.status(HttpStatusCode.OK).json(updatedFlat);
     }),
+
+    deleteFlat: asyncWrapper(async (req, res) => {
+        const { flat_id } = req.params;
+
+        const deletedFlat = await flatService.deleteFlat(flat_id);
+
+        if (!deletedFlat) {
+            return res.status(HttpStatusCode.NOT_FOUND).send({ message: 'Flat not found' });
+        }
+
+        return res.status(HttpStatusCode.OK).send('Flat was deleted');
+    }),
 };

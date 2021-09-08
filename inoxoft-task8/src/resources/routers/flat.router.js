@@ -12,7 +12,6 @@ router.post(
 
 router.get('/:flat_id', flatController.getFlatById);
 router.patch('/:flat_id', flatController.updateFlat);
-
-// router.delete('/flat', )
+router.delete('/:flat_id', flatController.deleteFlat);
 
 module.exports = router;
