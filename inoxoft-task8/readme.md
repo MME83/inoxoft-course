@@ -1,6 +1,6 @@
 # InoXoft Task-8
 
-### Mailing
+### Mailing & Tokenization all processes + first admin is created when server starting
 
 1. Methods: 
 - create, get all, get one by id/login/email, delete, update;
