@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
-const { authMiddleware, roleMiddleware, flatController } = require('../controllers');
+const { flatController } = require('../controllers');
+const { authMiddleware, roleMiddleware } = require('../../middleware');
 
 const { ADMIN } = require('../../common/user-role.enum');
 
