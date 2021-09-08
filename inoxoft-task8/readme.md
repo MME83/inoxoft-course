@@ -12,11 +12,11 @@
 - oauth (tokenization, with user_id)
 3. Routes:
 - /
-- auth/signup|login|loginout|refresh
+- auth/signup|login|logout|refresh|password/forgot/send|password/forgot/set
 - users/, users/user_id
 - buildings/, buildings/building_id
 - flats/, flats/flat_id 
-4. Mails:
+4. Emails:
 - send email with login&pass when admin create new user|admin account
 - send email with login when user register new account
 - send email when user reseting his password
@@ -59,13 +59,13 @@ npm start
 2.3. create user: 'http://localhost:5000/users' use post method with json format
 2.4. delete user: 'http://localhost:5000/users/user_id' use delete method
 2.5. update user: 'http://localhost:5000/users/user_id' use patch method
-3.1. buildings ((list of all buildings): 'http://localhost:5000/buildings' use get method)
-3.2. one building: 'http://localhost:5000/buildings/building_id' use get method
+3.1. get all buildings ((list of all buildings): 'http://localhost:5000/buildings' use get method)
+3.2. get one building: 'http://localhost:5000/buildings/building_id' use get method
 3.3. create building: 'http://localhost:5000/buildings' use post method with json format
 3.4. update building: 'http://localhost:5000/buildings/building_id' use patch method
 3.5. delete building: 'http://localhost:5000/buildings/building_id' use delete method
-4.1. flats ((list of all flats): 'http://localhost:5000/flats' use get method)
-4.2. one flat: 'http://localhost:5000/flats/flat_id' use get method
+4.1. get all flats ((list of all flats): 'http://localhost:5000/flats' use get method)
+4.2. get one flat: 'http://localhost:5000/flats/flat_id' use get method
 4.3. create flat: 'http://localhost:5000/flats' use post method with json format
 4.4. update flat: 'http://localhost:5000/flats/flat_id' use patch method (if you change owners, leave old(if they still) and/or add/write new some)
 4.5. delete building: 'http://localhost:5000/flats/flat_id' use delete method
