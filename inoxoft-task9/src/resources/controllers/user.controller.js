@@ -2,10 +2,16 @@ const { User } = require('../models');
 
 const { AOUTH_FIELD_UR } = require('../../common/modelsFields.enum');
 const emailActionsEnum = require('../../common/emailActions.enum');
+const actionTypesEnum = require('../../common/actionTypes.enum');
 const HttpStatusCode = require('../../common/statusCodes');
 const { EM_FRONT_URL } = require('../../common/config');
 
-const { authService, userService, emailService } = require('../services');
+const {
+    authService,
+    jwtService,
+    userService,
+    emailService
+} = require('../services');
 
 const asyncWrapper = require('../../middleware/asyncWrapper');
 
@@ -40,18 +46,23 @@ module.exports = {
             return res.status(HttpStatusCode.CONFLICT).send({ message: 'Can\'t create new User, try again' });
         }
 
+        const actionToken = jwtService.generateActionToken(actionTypesEnum.FORGOT_PASS);
+
+        await jwtService.createActionTokenInBd(actionToken, user._id);
+
         await emailService.sendMail(
             user.email,
             emailActionsEnum.CREATE_ACCOUNT,
             {
                 login: user.email,
-                password: req.body.password,
                 userName: user.name,
-                frontendLoginUrl: `${EM_FRONT_URL}/auth/login`,
+                frontendResetPass: `${EM_FRONT_URL}/auth/password/forgot/set?token=${actionToken}`
             }
         );
 
-        return res.status(HttpStatusCode.CREATED).json(User.toResponse(user));
+        return res.status(HttpStatusCode.CREATED).send(`${user.role} created, email for reset password was sent`);
+
+        // return res.status(HttpStatusCode.CREATED).json(User.toResponse(user));
     }),
 
     updateUser: asyncWrapper(async (req, res) => {
