@@ -17,9 +17,9 @@
 - buildings/, buildings/building_id
 - flats/, flats/flat_id 
 4. Emails:
-- send email with login&pass when admin create new user|admin account
+- send email with login&ActionToken(for change pass) when admin create new user|admin account
 - send email with login when user register new account
-- send email when user reseting his password
+- send email with action token when user reseting his password
 
 ```
 
