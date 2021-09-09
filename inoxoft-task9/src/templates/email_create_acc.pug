@@ -1,11 +1,10 @@
 extends email_container
 block content 
     div.block
-        | HELLO #{userName}
-        | please, do not reply to this msg
+        b Hello, #{userName}
+        em  please, do not reply to this msg
     div.block
-        | Here is your:
-        | login: #{login} and password: *******
+        | Here is your login: #{login} and password: *******
     div.block
-        | You should create your own password,
+        | You should create your own password, 
         a(href=frontendResetPass) link to set password
