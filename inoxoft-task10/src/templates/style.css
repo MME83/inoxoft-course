@@ -1,0 +1,11 @@
+h1 {
+    font-weight: 500;
+}
+.block {
+    padding-bottom: 10px;
+}
+.footer {
+    background-color: coral;
+    margin-top: 5px;
+    padding: 5px;
+}
