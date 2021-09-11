@@ -28,7 +28,7 @@ module.exports = {
 
         let updateBuilding = building;
 
-        if (building_image) {
+        if (req.files && req.files.building_image) {
             const { _id } = building;
             const uploadedImage = await s3Service.uploadImage(building_image, BUILDING, _id);
 

@@ -8,7 +8,7 @@ module.exports = {
         try {
             const { building_image } = req.files;
 
-            if (!building_image) {
+            if (!req.files || !req.files.building_image) {
                 next();
                 return;
             }
