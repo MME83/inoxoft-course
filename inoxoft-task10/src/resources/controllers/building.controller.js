@@ -26,6 +26,8 @@ module.exports = {
             return res.status(HttpStatusCode.CONFLICT).send('Can\'t create new building, try again');
         }
 
+        let updateBuilding = building;
+
         if (building_image) {
             const { _id } = building;
             const uploadedImage = await s3Service.uploadImage(building_image, BUILDING, _id);
@@ -34,10 +36,10 @@ module.exports = {
                 return res.status(HttpStatusCode.CREATED).json('Can\'t upload img, but building was created:\n', building);
             }
 
-            await buildingService.setBuildingImage(_id, uploadedImage.Location);
+            updateBuilding = await buildingService.setBuildingImage(_id, uploadedImage.Location);
         }
 
-        return res.status(HttpStatusCode.CREATED).json(building);
+        return res.status(HttpStatusCode.CREATED).json(updateBuilding);
     }),
 
     getBuildingById: asyncWrapper(async (req, res) => {
