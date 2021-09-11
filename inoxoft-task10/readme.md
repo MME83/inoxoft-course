@@ -1,12 +1,12 @@
 # InoXoft Task-10
 
-### Upload images to S3 AWS
+### Upload building image to S3 Bucket AWS
 
 1. Methods: 
 - create, get all, get one by id/login/email, delete, update;
 2. Models/schema:
 - users (admin & user role)
-- buildings (includs [flats_id's])
+- buildings (includs [flats_id's], path/location image in s3 bucket)
 - *almost RELISED (no validation by body)!!! -- > flats (includs [users_id's], [building_id])
 - user-model response to user without pass (used custom class Users)
 - oauth (tokenization, with user_id)
@@ -20,6 +20,8 @@
 - send email with login&ActionToken(for change pass) when admin create new user|admin account
 - send email with login when user register new account
 - send email with action token when user reseting his password
+5. Images:
+- upload image to s3 bucket AWS when creating new building and set image location in DB
 
 ```
 
