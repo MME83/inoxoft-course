@@ -1,0 +1,11 @@
+extends email_container
+block content 
+    div.block
+        | HELLO #{userName}, please, do not reply to this msg
+    div.block
+        | Here is your:
+        | login/email: #{login} and pass: ******
+    div.block
+        | Now you can signIN your account: 
+        a(href=frontendLoginUrl) link to login
+        
