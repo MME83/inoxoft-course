@@ -1,6 +1,9 @@
 const { Schema, model } = require('mongoose');
 
 const buildingSchema = new Schema({
+    building_image: {
+        type: String
+    },
     postalcode: {
         type: Number,
         minlength: 4,

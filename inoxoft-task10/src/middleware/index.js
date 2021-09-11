@@ -7,4 +7,6 @@ module.exports = {
 
     userMiddleware: require('./user.middleware'),
     buildingMiddleware: require('./building.middleware'),
+
+    imageMiddleware: require('./image.middleware'),
 };

@@ -1,4 +1,5 @@
 const { Buildings } = require('../models');
+const { BUILDINGS_FIELD_IMG } = require('../../common/modelsFields.enum');
 
 const getAll = async () => {
     const buildings = await Buildings.find();
@@ -51,6 +52,12 @@ const deleteBuilding = async (id) => {
     return true;
 };
 
+const setBuildingImage = async (building_id, imageLocation, modelField = BUILDINGS_FIELD_IMG) => {
+    const updateField = await Buildings.findByIdAndUpdate(building_id, { [modelField]: imageLocation }, { new: true });
+
+    return updateField;
+};
+
 module.exports = {
     getAll,
     getBuildingById,
@@ -58,4 +65,5 @@ module.exports = {
     createBuilding,
     updateBuilding,
     deleteBuilding,
+    setBuildingImage,
 };

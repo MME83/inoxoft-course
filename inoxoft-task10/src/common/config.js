@@ -20,4 +20,8 @@ module.exports = {
     EM_PASS: process.env.EM_PASS,
     EM_FRONT_URL: process.env.EM_FRONT_URL,
     EM_FRONT_URL2: process.env.EM_FRONT_URL2,
+    AWS_S3_REGION: process.env.AWS_S3_REGION,
+    AWS_S3_BUCKET: process.env.AWS_S3_BUCKET,
+    AWS_S3_ACCESS_KEY: process.env.AWS_S3_ACCESS_KEY,
+    AWS_S3_SECRET_KEY: process.env.AWS_S3_SECRET_KEY,
 };

@@ -1,8 +1,9 @@
-const HttpStatusCode = require('../../common/statusCodes');
-
-const { buildingService } = require('../services');
+const { buildingService, s3Service } = require('../services');
 
 const asyncWrapper = require('../../middleware/asyncWrapper');
+
+const HttpStatusCode = require('../../common/statusCodes');
+const { BUILDING } = require('../../db/dbTablesEnum');
 
 module.exports = {
 
@@ -17,10 +18,23 @@ module.exports = {
     }),
 
     createBuilding: asyncWrapper(async (req, res) => {
+        const { building_image } = req.files;
+
         const building = await buildingService.createBuilding(req.body);
 
         if (!building) {
             return res.status(HttpStatusCode.CONFLICT).send('Can\'t create new building, try again');
+        }
+
+        if (building_image) {
+            const { _id } = building;
+            const uploadedImage = await s3Service.uploadImage(building_image, BUILDING, _id);
+
+            if (!uploadedImage) {
+                return res.status(HttpStatusCode.CREATED).json('Can\'t upload img, but building was created:\n', building);
+            }
+
+            await buildingService.setBuildingImage(_id, uploadedImage.Location);
         }
 
         return res.status(HttpStatusCode.CREATED).json(building);

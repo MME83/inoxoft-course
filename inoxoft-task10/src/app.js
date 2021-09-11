@@ -1,4 +1,5 @@
 const express = require('express');
+const expressFileUpload = require('express-fileupload');
 
 const {
     authRouter,
@@ -13,6 +14,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(expressFileUpload());
 
 app.use('/', (req, res, next) => {
     if (req.originalUrl === '/') {

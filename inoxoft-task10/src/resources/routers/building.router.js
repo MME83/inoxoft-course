@@ -2,7 +2,12 @@ const router = require('express').Router();
 
 const user_role = require('../../common/user-role.enum');
 
-const { authMiddleware, roleMiddleware, buildingMiddleware } = require('../../middleware');
+const {
+    authMiddleware,
+    roleMiddleware,
+    buildingMiddleware,
+    imageMiddleware
+} = require('../../middleware');
 
 const { buildingController } = require('../controllers');
 
@@ -13,6 +18,7 @@ router.post(
     authMiddleware.checkAccessToken,
     roleMiddleware.checkUserRole([user_role.ADMIN]),
     buildingMiddleware.isReqBodyValid,
+    imageMiddleware.checkBuildingImage,
     buildingMiddleware.isEmailUnique,
     buildingController.createBuilding
 );

@@ -7,4 +7,6 @@ module.exports = {
     flatService: require('./flat.services'),
 
     emailService: require('./email.services'),
+
+    s3Service: require('./s3.services'),
 };
