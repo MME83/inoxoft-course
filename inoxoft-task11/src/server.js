@@ -10,6 +10,8 @@ const {
 const dbConnection = require('./db/dbConnection');
 const { createFirstAdmin } = require('./db/dbCreateFirstAdmin');
 
+const cronJobs = require('./cron');
+
 const start = async () => {
     try {
         const connect = await dbConnection(DB_PATH);
@@ -21,6 +23,7 @@ const start = async () => {
 
             app.listen(PORT, () => {
                 process.stdout.write(`App is running on http://localhost:${PORT}\n\n`);
+                cronJobs();
             });
         }
     } catch (err) {
