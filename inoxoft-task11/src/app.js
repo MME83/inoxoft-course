@@ -1,6 +1,7 @@
 const express = require('express');
 const expressFileUpload = require('express-fileupload');
 const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
 
 const {
     authRouter,
@@ -20,6 +21,7 @@ app.use(rateLimit({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(expressFileUpload());
+app.use(helmet());
 
 if (process.env.NODE_ENV === 'development') {
     // eslint-disable-next-line import/no-extraneous-dependencies
