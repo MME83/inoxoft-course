@@ -1,6 +1,6 @@
-# InoXoft Task-10
+# InoXoft Task-11
 
-### Upload building image to S3 Bucket AWS
+### Using Morgan, Helmet, Express-rate-limit, Cron Jobs
 
 1. Methods: 
 - create, get all, get one by id/login/email, delete, update;
@@ -22,12 +22,14 @@
 - send email with action token when user reseting his password
 5. Images:
 - upload image to s3 bucket AWS when creating new building and set image location in DB
+6. Cron Jobs
+- erasing all old tokens from DB every month
 
 ```
 
 ```
 
-### Download PR `inoxoft-course` from git to your PC and unzip folder `inoxoft-task10`, rename file `.env.example` to `.env` !!!
+### Download PR `inoxoft-course` from git to your PC and unzip folder `inoxoft-task11`, rename file `.env.example` to `.env` !!!
 
 ```
 
