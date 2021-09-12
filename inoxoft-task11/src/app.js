@@ -16,6 +16,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(expressFileUpload());
 
+if (process.env.NODE_ENV === 'development') {
+    // eslint-disable-next-line import/no-extraneous-dependencies
+    const morgan = require('morgan');
+
+    app.use(morgan('dev'));
+}
+
 app.use('/', (req, res, next) => {
     if (req.originalUrl === '/') {
         res.send('Service is running!');
