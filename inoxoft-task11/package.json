@@ -18,6 +18,7 @@
     "email-templates": "^8.0.8",
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
+    "express-rate-limit": "^5.3.0",
     "joi": "^17.4.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.2",
