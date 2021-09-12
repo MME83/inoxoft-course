@@ -12,11 +12,13 @@ const {
 
 const handleErrors = require('./middleware/globalHandleErrors');
 
+const { SERVER_RATELIMITS_PERIOD, SERVER_RATELIMITS_MAXREQUESTS } = require('./common/constants');
+
 const app = express();
 
 app.use(rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 1000 // limit each IP to 100 requests per windowMs
+    windowMs: SERVER_RATELIMITS_PERIOD, // 15 minutes
+    max: SERVER_RATELIMITS_MAXREQUESTS // limit each IP to 1000 requests per windowMs
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

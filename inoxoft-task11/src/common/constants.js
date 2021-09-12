@@ -7,4 +7,8 @@ module.exports = {
         'image/png',
         'image/webp'
     ],
+
+    // Server rate limits
+    SERVER_RATELIMITS_PERIOD: (15 * 60 * 1000),
+    SERVER_RATELIMITS_MAXREQUESTS: 1000,
 };
