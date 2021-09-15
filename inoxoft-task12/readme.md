@@ -1,13 +1,13 @@
-# InoXoft Task-11
+# InoXoft Task-12
 
-### Using Morgan, Helmet, Express-rate-limit, Cron Jobs
+### Using Swagger & Query Builder (pagination, sorting, filtering)
 
 1. Methods: 
 - create, get all, get one by id/login/email, delete, update;
 2. Models/schema:
 - users (admin & user role)
 - buildings (includs [flats_id's], path/location image in s3 bucket)
-- *almost RELISED (no validation by body)!!! -- > flats (includs [users_id's], [building_id])
+- flats (includs [users_id's], [building_id])
 - user-model response to user without pass (used custom class Users)
 - oauth (tokenization, with user_id)
 3. Routes:
@@ -29,7 +29,7 @@
 
 ```
 
-### Download PR `inoxoft-course` from git to your PC and unzip folder `inoxoft-task11`, rename file `.env.example` to `.env` !!!
+### Download PR `inoxoft-course` from git to your PC and unzip folder `inoxoft-task12`, rename file `.env.example` to `.env` !!!
 
 ```
 
@@ -72,7 +72,7 @@ npm start
 4.2. get one flat: 'http://localhost:5000/flats/flat_id' use get method
 4.3. create flat: 'http://localhost:5000/flats' use post method with json format
 4.4. update flat: 'http://localhost:5000/flats/flat_id' use patch method (if you change owners, leave old(if they still) and/or add/write new some)
-4.5. delete building: 'http://localhost:5000/flats/flat_id' use delete method
+4.5. delete flat: 'http://localhost:5000/flats/flat_id' use delete method
 5.1. login: 'http://localhost:5000/auth/login' use post method (with login as 'email', password)
 5.2. loginout: 'http://localhost:5000/auth/login' use post method (with access_token)
 5.3. refresh: 'http://localhost:5000/auth/login' use post method (with refresh_token)
