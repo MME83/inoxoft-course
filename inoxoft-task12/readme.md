@@ -1,6 +1,6 @@
 # InoXoft Task-12
 
-### Using Swagger & Query Builder (pagination, sorting, filtering)
+### Using Swagger & Query Builder (pagination, sorting, filtering with users)
 
 1. Methods: 
 - create, get all, get one by id/login/email, delete, update;
@@ -16,6 +16,7 @@
 - users/, users/user_id
 - buildings/, buildings/building_id
 - flats/, flats/flat_id 
+- docs/
 4. Emails:
 - send email with login&ActionToken(for change pass) when admin create new user|admin account
 - send email with login when user register new account
@@ -24,6 +25,8 @@
 - upload image to s3 bucket AWS when creating new building and set image location in DB
 6. Cron Jobs
 - erasing all old tokens from DB every month
+7. Swagger documentation (done only for users)
+- read documentation with users operations by API
 
 ```
 
@@ -79,4 +82,5 @@ npm start
 5.4. register: 'http://localhost:5000/auth/signup' use post method (with body data)
 5.5. reset password: 'http://localhost:5000/auth/password/forgot/send' use post method (with body data, login=email)
 5.6. set new password for user: 'http://localhost:5000/auth/password/forgot/set' use post method (with body data, password)
+6.1. read and work with users api documentation in any browser: 'http://localhost:5000/docs
 ```
