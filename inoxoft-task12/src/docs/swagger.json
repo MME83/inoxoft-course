@@ -8,11 +8,19 @@
   "tags": [
     {
       "name": "Auth",
-      "description": "Auth process"
+      "description": "Auth process..."
     },
     {
       "name": "Users",
       "description": "Operations with users"
+    },
+    {
+      "name": "Building",
+      "description": "Operations with building..."
+    },
+    {
+      "name": "Flats",
+      "description": "Operations with flats..."
     }
   ],
   "paths": {
@@ -284,6 +292,13 @@
             "required": true
           },
           {
+            "name": "name",
+            "in": "formData",
+            "type": "string",
+            "description": "User name",
+            "required": false
+          },
+          {
             "name": "email",
             "in": "formData",
             "type": "string",
@@ -323,6 +338,12 @@
               "$ref": "#/definitions/userIdIncorrectErrorSchema"
             }
           },
+          "404": {
+            "description": "User no found",
+            "schema": {
+              "$ref": "#/definitions/NoUserErrorSchema"
+            }
+          },
           "409": {
             "description": "Email already exists",
             "schema": {
@@ -342,23 +363,28 @@
             "name": "Authorization",
             "in": "header",
             "type": "string",
-            "description": "Token to authorize",
+            "description": "Admin token",
             "default": "FFF",
             "required": true
           },
           {
-            "name": "userId",
+            "name": "user_id",
             "in": "path",
             "type": "string",
-            "description": "User id",
+            "description": "User _id",
             "required": true
           }
         ],
         "responses": {
-          "404": {
-            "description": "User not found",
+          "200": {
+            "description": "Success",
             "schema": {
-              "$ref": "#/definitions/NoUserErrorSchema"
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User has deleted"
+                }
+              }
             }
           },
           "401": {
@@ -368,21 +394,21 @@
             }
           },
           "403": {
-            "description": "You aren`t admin",
+            "description": "Only admin has permission",
             "schema": {
-              "$ref": "#/definitions/PermissionDeniedErrorSchema"
+              "$ref": "#/definitions/RolePermissionErrorSchema"
             }
           },
           "400": {
-            "description": "Success",
+            "description": "User id validation Error",
             "schema": {
-              "$ref": "#/definitions/userIdNotCorrectErrorSchema"
+              "$ref": "#/definitions/userIdIncorrectErrorSchema"
             }
           },
-          "200": {
-            "description": "Success",
+          "404": {
+            "description": "User not found",
             "schema": {
-              "$ref": "#/definitions/SuccessErrorSchema"
+              "$ref": "#/definitions/NoUserErrorSchema"
             }
           }
         }
@@ -488,6 +514,14 @@
         "message": {
           "type": "string",
           "example": "User not found"
+        }
+      }
+    },
+    "RolePermissionErrorSchema": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Forbidden"
         }
       }
     },
