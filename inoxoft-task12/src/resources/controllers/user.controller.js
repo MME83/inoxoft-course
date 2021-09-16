@@ -18,13 +18,19 @@ const asyncWrapper = require('../../middleware/asyncWrapper');
 module.exports = {
 
     getAllUsers: asyncWrapper(async (req, res) => {
-        const users = await userService.getAll();
+        const users = await userService.getAll(req.query);
 
-        if (!users || users.length < 1) {
+        if (!users.data || users.data.length < 1) {
             return res.status(HttpStatusCode.NOT_FOUND).send({ message: 'No users found' });
         }
 
-        return res.status(HttpStatusCode.OK).json(users.map(User.toResponse));
+        return res.status(HttpStatusCode.OK).json({
+            data: users.data.map(User.toResponse),
+            page: users.page,
+            limit: users.limit,
+            count: users.count,
+            pageCount: users.pageCount
+        });
     }),
 
     getUserById: asyncWrapper(async (req, res) => {

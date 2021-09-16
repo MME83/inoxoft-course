@@ -2,6 +2,7 @@ const express = require('express');
 const expressFileUpload = require('express-fileupload');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
+const swagger = require('swagger-ui-express');
 
 const {
     authRouter,
@@ -13,6 +14,8 @@ const {
 const handleErrors = require('./middleware/globalHandleErrors');
 
 const { SERVER_RATELIMITS_PERIOD, SERVER_RATELIMITS_MAXREQUESTS } = require('./common/constants');
+
+const { swaggerJson } = require('./docs');
 
 const app = express();
 
@@ -41,6 +44,7 @@ app.use('/', (req, res, next) => {
     next();
 });
 
+app.use('/docs', swagger.serve, swagger.setup(swaggerJson));
 app.use('/auth', authRouter);
 app.use('/users', userRouter);
 app.use('/buildings', buildingRouter);

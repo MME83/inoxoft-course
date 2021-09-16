@@ -2,10 +2,51 @@ const { hashPassword } = require('../../util');
 
 const { Users } = require('../models');
 
-const getAll = async () => {
-    const users = await Users.find();
+const getAll = async (queryData = {}) => {
+    const {
+        perPage = 10,
+        page = 1,
+        sortBy = 'createdAt',
+        order = 'asc',
+        ...filters
+    } = queryData;
 
-    return users;
+    const skip = (page - 1) * perPage;
+    const orderBy = order === 'asc' ? -1 : 1;
+    const sort = { [sortBy]: orderBy };
+
+    const filterObject = {};
+
+    Object.keys(filters).forEach((key) => {
+        switch (key) {
+            case 'role':
+                const rolesArr = filters.role.split(';');
+                filterObject.role = { $in: rolesArr };
+                break;
+            case 'email':
+                filterObject.email = filters.email;
+                break;
+            case 'name':
+                filterObject.name = { $regex: `^${filters.name}`, $options: 'gi' };
+                break;
+        }
+    });
+
+    const users = await Users
+        .find(filterObject)
+        .limit(+perPage)
+        .skip(skip)
+        .sort(sort);
+
+    const count = await Users.countDocuments(filterObject);
+
+    return {
+        data: users,
+        page,
+        limit: +perPage,
+        count,
+        pageCount: Math.ceil(count / perPage)
+    };
 };
 
 const getUserById = async (id) => {

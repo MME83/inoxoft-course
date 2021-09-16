@@ -28,7 +28,7 @@ router.post(
 router.get(
     '/:flat_id',
     authMiddleware.checkAccessToken,
-    roleMiddleware.checkUserRole([USER]),
+    roleMiddleware.checkRoleAndIdAccess([USER]),
     flatMiddleware.isFlatIdValid,
     flatController.getFlatById
 );

@@ -1,7 +1,10 @@
 const { Flats, Users, Buildings } = require('../models');
 
 const getAllFlats = async () => {
-    const flats = await Flats.find();
+    const flats = await Flats.find()
+        .populate('building', '-building_image -postalcode -email  -flats -createdAt -updatedAt -__v')
+        .populate('owners', '-password -flats -role -__v ')
+        .exec();
 
     return flats;
 };
@@ -20,7 +23,10 @@ const createFlat = async (flatData) => {
 };
 
 const getFlatById = async (id) => {
-    const flat = await Flats.findOne({ _id: `${id}` });
+    const flat = await Flats.findOne({ _id: `${id}` })
+        .populate('building', '-flats -createdAt -updatedAt -__v')
+        .populate('owners', '-password -flats -role -createdAt -updatedAt -__v ')
+        .exec();
 
     return flat;
 };

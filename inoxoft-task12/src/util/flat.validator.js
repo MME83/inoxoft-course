@@ -14,7 +14,7 @@ const flatBodyJV = Joi.object({
     apt_number: Joi
         .string().trim().min(1).required(),
     apt_total_sm: Joi
-        .number().trim().min(1).required(),
+        .number().min(1).required(),
     rooms_num: Joi
         .number().min(1).max(1).required()
         .default(RoomsNumberEnum.ONE_ROOM)
@@ -32,7 +32,7 @@ const updFlatBodyJV = Joi.object({
     apt_number: Joi
         .string().trim().min(1),
     apt_total_sm: Joi
-        .number().trim().min(1),
+        .number().min(1),
     rooms_num: Joi
         .number().min(1).max(1)
         .valid(...Object.values(RoomsNumberEnum)),
